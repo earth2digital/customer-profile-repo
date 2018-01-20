@@ -1,9 +1,3 @@
-# customer-profile-repo
-This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API
-
-# wx-api-scv-member-profile-aws
-A new repo for the wx-api-scv-member-profile API production version that would be deployed on AWS instead of apigee
-
 ## Overview
 This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
 
