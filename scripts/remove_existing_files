@@ -1,3 +1,3 @@
-***REMOVED***
+#!/bin/bash
 rm -rf /home/ec2-user/express-service/*
 mkdir /home/ec2-user/express-service/logs

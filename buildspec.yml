@@ -14,20 +14,20 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - ***REMOVED***(aws ecr get-login --no-include-email --region ***REMOVED***AWS_DEFAULT_REGION)
+      - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t ***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG .
-      - docker tag ***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG      
+      - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[***REMOVED***"name":"member-profile-container","imageUri":"%s"***REMOVED***]' ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"member-profile-container","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
