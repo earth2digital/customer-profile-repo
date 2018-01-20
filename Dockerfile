@@ -25,7 +25,7 @@ WORKDIR /opt/app
 COPY app/ /opt/app/
 
 # 4. Install app dependencies
-#    ***REMOVED*** would install all the dependencies in package.json
+#    npm install would install all the dependencies in package.json
 
 RUN apk upgrade --update
 RUN apk add --update \
@@ -33,8 +33,8 @@ RUN apk add --update \
     curl \
     sed \
     nodejs
-RUN bash -c "***REMOVED***(***REMOVED***)"
-RUN ***REMOVED***
+RUN bash -c "$(curl -sL https://rpm.nodesource.com/setup_8.x | bash -)"
+RUN npm install
 
 # 5. Bind node.js app to port 8080 and IP 0.0.0.0
 #    If PORT is set as environment vraiable it would be set as the port

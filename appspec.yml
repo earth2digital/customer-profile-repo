@@ -31,7 +31,7 @@ hooks:
 #             This event is reserved for the AWS CodeDeploy agent and cannot be used to run scripts.
 # 5. AfterInstall: we will use this step to install forever and node dependencies. dependencies exist in package.json
   AfterInstall:
-    - location: ***REMOVED***
+    - location: scripts/install_dependencies
       timeout: 300
       runas: root
 # 6. ApplicationStart: You typically use this deployment lifecycle event to restart services that were stopped during ApplicationStop

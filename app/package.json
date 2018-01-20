@@ -1,14 +1,14 @@
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-    "dependencies": ***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
-***REMOVED***
+{
+    "name": "customer-profile-api-app",
+    "description": "This is the customer profile API app which queries customer details from AWS DynamoDB",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "aws-sdk": "^2.176.0",
+        "body-parser": "^1.18.2",
+        "express": "latest",
+        "express-healthcheck": "^0.1.0",
+        "my-module": "file:local_modules/my-module",
+        "request": "^2.83.0"
+    }
+}

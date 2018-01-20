@@ -41,10 +41,10 @@ paths:
           schema:
             type: "array"
             items:
-              ***REMOVED***ref: "#/definitions/InventoryItem"
+              $ref: "#/definitions/InventoryItem"
         400:
           description: "bad input parameter"
-  /customers/***REMOVED***customerId***REMOVED***:
+  /customers/{customerId}:
     get:
       tags:
       - "developers"
@@ -66,7 +66,7 @@ paths:
           schema:
             type: "array"
             items:
-              ***REMOVED***ref: "#/definitions/InventoryItem"
+              $ref: "#/definitions/InventoryItem"
         400:
           description: "bad input parameter"
 definitions:
@@ -81,17 +81,17 @@ definitions:
       id:
         type: "string"
         format: "uuid"
-        ***REMOVED*** "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
       name:
         type: "string"
-        ***REMOVED*** "Widget Adapter"
+        example: "Widget Adapter"
       releaseDate:
         type: "string"
         format: "int32"
-        ***REMOVED*** "2016-08-29T09:12:33.001Z"
+        example: "2016-08-29T09:12:33.001Z"
       manufacturer:
-        ***REMOVED***ref: "#/definitions/Manufacturer"
-    ***REMOVED***
+        $ref: "#/definitions/Manufacturer"
+    example:
       releaseDate: "2016-08-29T09:12:33.001Z"
       name: "Widget Adapter"
       id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
@@ -105,15 +105,15 @@ definitions:
     properties:
       name:
         type: "string"
-        ***REMOVED*** "ACME Corporation"
+        example: "ACME Corporation"
       homePage:
         type: "string"
         format: "url"
-        ***REMOVED*** "https://www.acme-corp.com"
+        example: "https://www.acme-corp.com"
       phone:
         type: "string"
-        ***REMOVED*** "408-867-5309"
-    ***REMOVED***
+        example: "408-867-5309"
+    example:
       phone: "408-867-5309"
       name: "ACME Corporation"
       homePage: "https://www.acme-corp.com"
