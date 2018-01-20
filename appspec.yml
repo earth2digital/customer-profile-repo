@@ -1,0 +1,51 @@
+############################################################
+# Overview: This is appspec.yml file used by AWS CodeDeploy
+#           used to deploy Customer Profile API App on AWS
+#           EC2 instances
+# license:
+#   name: MIT
+#   url: https://opensource.org/licenses/MIT
+###########################################################
+
+version: 0.0
+os: linux
+files:
+  - source: /app
+    destination: /home/ec2-user/express-service
+
+hooks:
+# 1. ApplicationStop: this is the very first step in deployment. In this step we will gracefully 
+#                     stop the application if it is running.
+  ApplicationStop:
+    - location: scripts/stop_server
+      timeout: 300
+      runas: root
+# 2. DownloadBundle: AWS CodeDeploy agent copies the application revision files to a temporary location.
+#                   This event is reserved for the AWS CodeDeploy agent and cannot be used to run scripts.
+# 3. BeforeInstall: used for preinstall tasks. here we would remove existing files under app directory
+  BeforeInstall:
+    - location: scripts/remove_existing_files
+      timeout: 300
+      runas: root
+# 4. Install: AWS CodeDeploy agent copies the revision files from the temporary location to the final destination folder
+#             This event is reserved for the AWS CodeDeploy agent and cannot be used to run scripts.
+# 5. AfterInstall: we will use this step to install forever and node dependencies. dependencies exist in package.json
+  AfterInstall:
+    - location: ***REMOVED***
+      timeout: 300
+      runas: root
+# 6. ApplicationStart: You typically use this deployment lifecycle event to restart services that were stopped during ApplicationStop
+  ApplicationStart:
+    - location: scripts/start_server
+      timeout: 300
+      runas: root
+# 7. ValidateService: This is the last deployment lifecycle event. It is used to verify the deployment was completed successfully.
+# 8. BeforeBlockTraffic: You can use this deployment lifecycle event to run tasks on instances before they are deregistered from a load balancer.
+# 9. BlockTraffic: During this deployment lifecycle event, internet traffic is blocked from accessing 
+#                  instances that are currently serving traffic. This event is reserved for the AWS CodeDeploy 
+#                  agent and cannot be used to run scripts.
+# 10. AfterBlockTraffic: use it to run tasks on instances after they are deregistered from a load balancer.
+# 11. BeforeAllowTraffic: use it to run tasks on instances before they are registered with a load balancer.
+# 12. AllowTraffic: During this deployment lifecycle event, internet traffic is allowed to access 
+#                   instances after a deployment. This event is reserved for the AWS CodeDeploy agent and cannot be used to run scripts.
+# 13. AfterAllowTraffic: You can use this deployment lifecycle event to run tasks on instances after they are registered with a load balancer.
