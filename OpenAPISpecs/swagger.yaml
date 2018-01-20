@@ -1,0 +1,119 @@
+---
+swagger: "2.0"
+info:
+  description: "This isa demo API for customer profile"
+  version: "1.0.0"
+  title: "Customer Profile API"
+  contact:
+    email: "info@earth2.com.au"
+  license:
+    name: "MIT"
+    url: "https://opensource.org/licenses/MIT"
+host: "virtserver.swaggerhub.com"
+basePath: "/Earth2Software/customer-profile-api/1.0.0"
+tags:
+- name: "admins"
+  description: "Secured Admin-only calls"
+- name: "developers"
+  description: "Operations available to regular developers"
+schemes:
+- "https"
+paths:
+  /customers:
+    get:
+      tags:
+      - "developers"
+      summary: "searches inventory"
+      description: "This API returns a summary list of customers who matches the query\
+        \ parameters (name, dob, etc)\n"
+      operationId: "searchCustomers"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "pass an optional search string for looking up inventory"
+        required: false
+        type: "string"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              ***REMOVED***ref: "#/definitions/InventoryItem"
+        400:
+          description: "bad input parameter"
+  /customers/***REMOVED***customerId***REMOVED***:
+    get:
+      tags:
+      - "developers"
+      summary: "searches inventory"
+      description: "This API returns the API Profile for the customer with the customer\
+        \ Id specified by customerId\n"
+      operationId: "getCustomerProfile"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "customerId"
+        in: "path"
+        description: "Numeric ID of the user to get."
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "search results matching criteria"
+          schema:
+            type: "array"
+            items:
+              ***REMOVED***ref: "#/definitions/InventoryItem"
+        400:
+          description: "bad input parameter"
+definitions:
+  InventoryItem:
+    type: "object"
+    required:
+    - "id"
+    - "manufacturer"
+    - "name"
+    - "releaseDate"
+    properties:
+      id:
+        type: "string"
+        format: "uuid"
+        ***REMOVED*** "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      name:
+        type: "string"
+        ***REMOVED*** "Widget Adapter"
+      releaseDate:
+        type: "string"
+        format: "int32"
+        ***REMOVED*** "2016-08-29T09:12:33.001Z"
+      manufacturer:
+        ***REMOVED***ref: "#/definitions/Manufacturer"
+    ***REMOVED***
+      releaseDate: "2016-08-29T09:12:33.001Z"
+      name: "Widget Adapter"
+      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      manufacturer:
+        phone: "408-867-5309"
+        name: "ACME Corporation"
+        homePage: "https://www.acme-corp.com"
+  Manufacturer:
+    required:
+    - "name"
+    properties:
+      name:
+        type: "string"
+        ***REMOVED*** "ACME Corporation"
+      homePage:
+        type: "string"
+        format: "url"
+        ***REMOVED*** "https://www.acme-corp.com"
+      phone:
+        type: "string"
+        ***REMOVED*** "408-867-5309"
+    ***REMOVED***
+      phone: "408-867-5309"
+      name: "ACME Corporation"
+      homePage: "https://www.acme-corp.com"
