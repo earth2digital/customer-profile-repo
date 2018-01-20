@@ -11,7 +11,44 @@ git add -A
 git commit -am "commit message, please write clearly the updates you have done as part of the commit"
 git push
 ```
+## How to build local_modules
+In some cases if you need to install local modules because you don't have them in the standard npm distribution (e.g. custom built AWS JS SDK using https://sdk.amazonaws.com/builder/js/ to minimize the size of your node_modules folder).
 
+first you create local_modules and inside the folder you add your modules one by one. Each module would have to have package.json and optionally other files like README.md
+inside package.json including local_modules would look like that
+```
+{
+    "name": "customer-profile-api-app",
+    "description": "This is the customer profile API app which queries customer details from AWS DynamoDB",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "aws-sdk": "file:local_modules/aws-sdk",
+        "body-parser": "^1.18.2",
+        "express": "latest",
+        "express-healthcheck": "^0.1.0",
+        "request": "^2.83.0"
+    }
+}
+```
+./local_modules/aws-sdk/package.json
+```
+{
+    "name": "aws-sdk",
+    "description": "This is s the custom package for aws SDK",
+    "version": "0.1.0",
+    "private": true
+}
+```
+to run npm install in a way to have local_modules included as links in node_modules, you execute the command below:
+```
+npm install --save ./local_modules/aws-sdk
+```
+then execute the below command to get the rest of the modules that are not local_modules
+```
+npm install
+```
+after all is done, you commit the files as is to github
 ## .env file
 .env file is used by NodeJS code to set configuration inside the API app. 
 
