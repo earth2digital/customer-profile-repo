@@ -9,24 +9,34 @@ const express = require('express');
 const AWS = require('aws-sdk');
 const BodyParser = require('body-parser');
 
-const port = process.env.PORT || 3000;
+/*
+Working with environment variables is a great way to configure 
+different aspects of  Node.js application. Here we are setting
+port, APIKey and APISecret. All of these variables should be stored
+in AWS Parameter Store and then when docker is about to run, we
+include all of these varaiables
+*/
+
+const APIKey = process.env.APIKey || 'apikey';
+const APISecret = process.env.APISecret || 'apisecret';
+const port = process.env.PORT || 8080;
+const AWSCloudSearchDomainEndpoint = process.env.AWSCloudSearchDomainEndpoint || 'AWSCloudSearchDomain';
+
 const app = express();
 app.use(BodyParser.json());
 app.use('/healthcheck', require('express-healthcheck')());
 
-const CLOUDSEARCHDOMAIN_ENDPOINT = 'search-customers-by-name-xhoerbnks4embre3fa2khli4qm.ap-southeast-2.cloudsearch.amazonaws.com'
 // policy role to be applied on instance so that we can avoid the below.
 const CLOUDSEARCHDOMAIN_PARAMS = {
-  endpoint: CLOUDSEARCHDOMAIN_ENDPOINT,
-  accessKeyId: '',
-  secretAccessKey: '',
+  endpoint: AWSCloudSearchDomainEndpoint,
+  accessKeyId: APIKey,
+  secretAccessKey: APISecret,
 };
 
 AWS.config.update({region: 'ap-southeast-2'});
 
 function customer_detail(req, res, next){
   const dyno = new AWS.DynamoDB.DocumentClient();
-  //added by adam to allow CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://wow.myprototype.com.au');
   const crn = parseInt(req.params.crn);
   console.log(`customer_detail: crn=${crn}`);
@@ -47,7 +57,7 @@ function customer_detail(req, res, next){
 
 function search_transform(data){
   let ret = [];
-  console.log('data', JSON.stringify(data));
+  //console.log('data', JSON.stringify(data));
   for (let i = 0; i < data.hits.hit.length; i++ ) {
     let obj = data.hits.hit[i].fields;
     let obj2 = {};
@@ -83,7 +93,7 @@ function search_attr(req, res, next){
     queryParser: 'structured',
     size: 10
   };
-  console.log('params', params);
+  //console.log('params', params);
   let p = cloudsearchdomain.search(params).promise();
   p.then(data => {
     res.send(JSON.stringify({
