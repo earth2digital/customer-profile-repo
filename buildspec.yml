@@ -1,0 +1,33 @@
+####################################################################
+# Overview: this is the buildspec.yml YAML file used
+#           by AWS CodeBuild to build the docker image
+#           for the Customer Profile API App
+#           after the image is built, it is pushed to AWS ECR Repo
+# license:
+#    name: MIT
+#    url: https://opensource.org/licenses/MIT
+###################################################################
+
+version: 0.1
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - ***REMOVED***(aws ecr get-login --no-include-email --region ***REMOVED***AWS_DEFAULT_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t ***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG .
+      - docker tag ***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[***REMOVED***"name":"member-profile-container","imageUri":"%s"***REMOVED***]' ***REMOVED***AWS_ACCOUNT_ID.dkr.ecr.***REMOVED***AWS_DEFAULT_REGION.amazonaws.com/***REMOVED***IMAGE_REPO_NAME:***REMOVED***IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
