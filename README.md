@@ -36,6 +36,10 @@ to run npm install in a way to have local_modules included as links in node_modu
 ```
 npm install --save ./local_modules/aws-sdk
 ```
+then execute the below command to get the rest of the modules that are not local_modules
+```
+npm install
+```
 after all is done, you commit the files as is to github
 ## .env file
 .env file is used by NodeJS code to set configuration inside the API app. 
