@@ -95,5 +95,5 @@ add curl example here
 ```
 
 ## OpenAPI Specs
-Swagger/OpenAPI Specs can be found at [Earth2 Customer Profile API OpenAPI Specs](https://app.swaggerhub.com/apis/Earth2Software/customer-profile-api/1.0.0)
+Swagger/OpenAPI Specs can be found at [Customer Profile API OpenAPI Specs](https://app.swaggerhub.com/apis/Earth2Software/customer-profile-api/1.0.0)
 
