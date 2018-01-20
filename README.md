@@ -24,12 +24,20 @@ inside package.json including local_modules would look like that
     "private": true,
     "dependencies": {
         "aws-sdk": "file:local_modules/aws-sdk",
-        "aws-sdk-custom": "file:local_modules/aws-sdk",
         "body-parser": "^1.18.2",
         "express": "latest",
         "express-healthcheck": "^0.1.0",
         "request": "^2.83.0"
     }
+}
+```
+./local_modules/aws-sdk/package.json
+```
+{
+    "name": "aws-sdk",
+    "description": "This is s the custom package for aws SDK",
+    "version": "0.1.0",
+    "private": true
 }
 ```
 to run npm install in a way to have local_modules included as links in node_modules, you execute the command below:
