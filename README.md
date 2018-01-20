@@ -23,26 +23,27 @@ inside package.json including local_modules would look like that
     "version": "0.1.0",
     "private": true,
     "dependencies": {
-        "aws-sdk": "file:local_modules/aws-sdk",
+        "aws-sdk": "^2.176.0",
         "body-parser": "^1.18.2",
         "express": "latest",
         "express-healthcheck": "^0.1.0",
+        "my-module": "file:local_modules/my-module",
         "request": "^2.83.0"
     }
 }
 ```
-./local_modules/aws-sdk/package.json
+./local_modules/my-module/package.json
 ```
 {
-    "name": "aws-sdk",
-    "description": "This is s the custom package for aws SDK",
+    "name": "my-module",
+    "description": "This is a test for adding local_module to the app",
     "version": "0.1.0",
     "private": true
 }
 ```
 to run npm install in a way to have local_modules included as links in node_modules, you execute the command below:
 ```
-npm install --save ./local_modules/aws-sdk
+npm install --save ./local_modules/my-module
 ```
 then execute the below command to get the rest of the modules that are not local_modules
 ```

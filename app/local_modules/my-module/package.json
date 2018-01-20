@@ -1,0 +1,6 @@
+{
+    "name": "my-module",
+    "description": "This is a test for adding local_module to the app",
+    "version": "0.1.0",
+    "private": true
+}
