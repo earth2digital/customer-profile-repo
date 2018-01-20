@@ -25,7 +25,7 @@ paths:
       - "developers"
       summary: "searches inventory"
       description: "This API returns a summary list of customers who matches the query\
-        \ parameters (name, dob, etc.)\n"
+        \ parameters (name, dob, etc)\n"
       operationId: "searchCustomers"
       produces:
       - "application/json"
