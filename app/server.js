@@ -26,6 +26,14 @@ const app = express();
 app.use(BodyParser.json());
 app.use('/healthcheck', require('express-healthcheck')());
 
+// Express Basic Auth
+
+var basicAuth = require('express-basic-auth')
+ 
+app.use(basicAuth({
+    users: { 'admin' : 'admin' }
+}))
+
 // policy role to be applied on instance so that we can avoid the below.
 const CLOUDSEARCHDOMAIN_PARAMS = {
   endpoint: AWSCloudSearchDomainEndpoint,
