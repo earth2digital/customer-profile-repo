@@ -178,6 +178,7 @@ cd /home/ec2-user/express-service
 curl -sL https://rpm.nodesource.com/setup_8.x | bash -
 yum install -y nodejs
 npm install forever -g
+npm install --save ./local_modules/my-module
 npm install
 ```
 you need to have the .env file under /home/ubuntu/workspace
