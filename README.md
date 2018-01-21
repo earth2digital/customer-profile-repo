@@ -98,7 +98,8 @@ then execute the below command to get the rest of the modules that are not local
 ```
 npm install
 ```
-after all is done, you commit the files as is to github
+after all is done, you commit the files to github. node_modules won't be commited as it is listed in the .gitingnore file. local_modules would get committed.
+
 ## .env file
 .env file is used by NodeJS code to set configuration inside the API app. 
 
