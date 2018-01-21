@@ -25,6 +25,8 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo creating repo $EARTH2_IMAGE_REPO_NAME in ECR
+      - $(aws ecr create-repository --repository-name $EARTH2_IMAGE_REPO_NAME --region $EARTH2_AWS_ECR_REGION)
       - echo Pushing the Docker image to $EARTH2_AWS_ACCOUNT_ID $EARTH2_AWS_ECR_REGION ...
       - docker push $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG
       - echo Writing image definitions file...
