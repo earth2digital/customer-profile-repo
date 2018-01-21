@@ -1,22 +1,65 @@
 ## Overview
 This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
 
-To get a copy of this repo
-```
-git clone git@github.com:earth2software/customer-profile-repo
-```
-to commit and push your changes
-```
-ssh -i ~/.ssh/{YOUR_SSH_PRIVATE_KEY} -T git@github.com
+## Generate and use multiple ssh keys for github
 
-Enter passphrase for key '/Users/adam/.ssh/{YOUR_SSH_PRIVATE_KEY}': 
-Hi {GITHUB_USERNAME} You've successfully authenticated, but GitHub does not provide shell access.
-$
- 
-git add -A
-git commit -am "commit message, please write clearly the updates you have done as part of the commit"
-git push
+- Generate SSH keys for 2 github accounts
 ```
+$ ssh-keygen -t rsa -C "fname.lastname@company1.com" -f ~/.ssh/{KeyFileNameForAccount1}
+$ ssh-keygen -t rsa -C "fname.lastname@company1.com" -f ~/.ssh/{KeyFileNameForAccount2}
+```
+- Add the above keys to ssh client
+```
+$ ssh-add ~/.ssh/{KeyFileNameForAccount1}
+$ ssh-add ~/.ssh/{KeyFileNameForAccount2}
+```
+- List your ssh keys
+```
+$ ssh-add -l
+```
+- Modify ssh config file
+```
+$ cd ~/.ssh/
+$ touch config
+$ vi config
+
+#Account1
+Host github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/{KeyFileNameForAccount1}
+
+#account2
+Host github.com-{GITHUB_USERNAME_FOR_ACCOUNT2}
+	HostName github.com
+	User git
+	IdentityFile ~/.ssh/{KeyFileNameForAccount2}
+```
+- Set URL for Git
+```
+$ git remote set-url origin git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Company1Name}/customer-profile-repo.git
+```
+- To get a copy of this repo
+```
+git clone git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Company1Name}/customer-profile-repo
+```
+- push updates
+```
+$ git add -A
+$ git commit -am "commit message, please write clearly the updates you have done as part of the commit"
+$ git push
+
+Counting objects: 9, done.
+Delta compression using up to 4 threads.
+Compressing objects: 100% (9/9), done.
+Writing objects: 100% (9/9), 1.41 KiB | 1.41 MiB/s, done.
+Total 9 (delta 6), reused 0 (delta 0)
+remote: Resolving deltas: 100% (6/6), completed with 4 local objects.
+To github.com-adamaliau:earth2software/customer-profile-repo.git
+   ffba2fc..5605747  master -> master
+$
+```
+
 ## How to build local_modules
 In some cases if you need to install local modules because you don't have them in the standard npm distribution (e.g. custom built AWS JS SDK using https://sdk.amazonaws.com/builder/js/ to minimize the size of your node_modules folder).
 
