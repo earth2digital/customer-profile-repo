@@ -114,7 +114,7 @@ If you will use AWS CodeDeploy to deploy the App/API to AWS EC2 resources. AWS C
 AWS CodeDeploy monitors this repository and if any changes happens, the code gets checked out and deployed to dev first. 
 
 ## Docker on AWS ECS
-If you will use Docker, Dockerfile is the file used to build docker image
+- If you will use Docker, Dockerfile is the file used to build docker image
 ```
 sudo docker build --tag="earth2/customer-profile-app:v1.0.0" {directory_where_your_files_are}
 
@@ -129,6 +129,31 @@ $ docker logs a83a35aa19c97cca5a8bd925ccd529a6ee28af755b2f587847232ee57db9c575
 
 server running at port: 8080
 $
+```
+- Test App/API
+```
+$ curl http://localhost:80/customers?name=adam
+{
+    "status": "OK",
+    "predictions": [
+        {
+            "name": "test adam",
+            "firstname": "adam",
+            "lastname": "emmitt",
+            "dateofbirth": "1967-05-01",
+            "singlelineaddress": "702T 10 16 Marquet Street",
+            "crn": "100000002"
+        },
+        {
+            "name": "maza adam ali",
+            "firstname": "jack",
+            "lastname": "lester",
+            "dateofbirth": "1977-05-01",
+            "singlelineaddress": "701T 10 16 Marquet Street",
+            "crn": "100000003"
+        }
+    ]
+}$ 
 ```
 
 ## Install
