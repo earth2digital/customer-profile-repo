@@ -83,9 +83,6 @@ function search_attr(req, res, next){
   const cloudsearchdomain = new AWS.CloudSearchDomain(CLOUDSEARCHDOMAIN_PARAMS);
   //added by Adam to allow CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://wow.myprototype.com.au');
-  let dyno = new AWS.DynamoDB.DocumentClient();
-  //let attr = req.params.attr;
-  //let name = req.params.name;
   let attr = Object.keys(req.query)[0];
   let value = req.query[attr];
   let params = {
