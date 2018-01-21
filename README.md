@@ -6,7 +6,7 @@ This is a nodeJS customer profile repo to demo E2E Architecture Design for custo
 - Generate SSH keys for 2 github accounts
 ```
 $ ssh-keygen -t rsa -C "fname.lastname@company1.com" -f ~/.ssh/{KeyFileNameForAccount1}
-$ ssh-keygen -t rsa -C "fname.lastname@company1.com" -f ~/.ssh/{KeyFileNameForAccount2}
+$ ssh-keygen -t rsa -C "fname.lastname@company2.com" -f ~/.ssh/{KeyFileNameForAccount2}
 ```
 - Add the above keys to ssh client
 ```
