@@ -28,7 +28,7 @@ phases:
       - echo Pushing the Docker image to $EARTH2_AWS_ACCOUNT_ID $EARTH2_AWS_ECR_REGION ...
       - docker push $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"$EARTH2_ECS_SERVICE_CONTAINER_NAME","imageUri":"%s"}]' $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $EARTH2_ECS_SERVICE_CONTAINER_NAME $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files:
