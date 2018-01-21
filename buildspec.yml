@@ -19,16 +19,16 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image $EARTH2_IMAGE_REPO_NAME:$IMAGE_TAG ...          
-      - docker build -t $EARTH2_IMAGE_REPO_NAME:$IMAGE_TAG .
-      - docker tag $EARTH2_IMAGE_REPO_NAME:$IMAGE_TAG $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_DEFAULT_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG      
+      - echo Building the Docker image $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG ...          
+      - docker build -t $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG .
+      - docker tag $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG      
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image to $EARTH2_AWS_ACCOUNT_ID $EARTH2_AWS_DEFAULT_REGION ...
-      - docker push $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_DEFAULT_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG
+      - echo Pushing the Docker image to $EARTH2_AWS_ACCOUNT_ID $EARTH2_AWS_ECR_REGION ...
+      - docker push $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"$EARTH2_ECS_SERVICE_CONTAINER_Name","imageUri":"%s"}]' $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_DEFAULT_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"$EARTH2_ECS_SERVICE_CONTAINER_NAME","imageUri":"%s"}]' $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files:
