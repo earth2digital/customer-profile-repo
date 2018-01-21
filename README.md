@@ -69,7 +69,17 @@ If you will use Docker, Dockerfile is the file used to build docker image
 ```
 sudo docker build --tag="earth2/customer-profile-app:v1.0.0" {directory_where_your_files_are}
 
-add docker run command
+$ docker run -d -t -i -e APIKey={APIKey} -e APISecret={APISecret} -e AWSCloudSearchDomainEndpoint='{AWSCloudSearchDomainEndpoint}' -p 80:8080 -it {DockerImageId}
+
+a83a35aa19c97cca5a8bd925ccd529a6ee28af755b2f587847232ee57db9c575
+$ 
+$ docker logs a83a35aa19c97cca5a8bd925ccd529a6ee28af755b2f587847232ee57db9c575
+
+> customer-profile-api-app@0.1.0 start /opt/app
+> node server.js "server.js"
+
+server running at port: 8080
+$
 ```
 
 ## Install
