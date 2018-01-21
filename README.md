@@ -7,6 +7,12 @@ git clone git@github.com:earth2software/customer-profile-repo
 ```
 to commit and push your changes
 ```
+ssh -i ~/.ssh/{YOUR_SSH_PRIVATE_KEY} -T git@github.com
+
+Enter passphrase for key '/Users/adam/.ssh/{YOUR_SSH_PRIVATE_KEY}': 
+Hi {GITHUB_USERNAME} You've successfully authenticated, but GitHub does not provide shell access.
+$
+ 
 git add -A
 git commit -am "commit message, please write clearly the updates you have done as part of the commit"
 git push
