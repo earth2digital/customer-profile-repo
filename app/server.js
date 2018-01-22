@@ -34,6 +34,13 @@ app.use(basicAuth({
     users: { 'admin' : 'admin' }
 }))
 
+/*var users = {}; 
+users[APIKey] = APISecret;
+
+app.use(basicAuth({
+    users: users
+}))*/
+
 // policy role to be applied on instance so that we can avoid the below.
 const CLOUDSEARCHDOMAIN_PARAMS = {
   endpoint: AWSCloudSearchDomainEndpoint,
