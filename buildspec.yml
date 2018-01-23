@@ -11,6 +11,12 @@
 version: 0.1
 
 phases:
+  install:
+    commands:
+      - echo Installing JEST ...
+      - cd app
+      - npm install -g jest
+      - npm test
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
