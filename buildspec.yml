@@ -17,8 +17,11 @@ phases:
       - cd app
       - pwd
       - echo Installing npm
-      - apt-get update
-      - apt-get -y install npm
+      - apt-get install python-software-properties
+      - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+      - apt-get install nodejs
+      - node -v
+      - npm -v
       - npm install -g jest
       - npm test
   pre_build:
