@@ -48,7 +48,7 @@ AWS.config.update({region: 'ap-southeast-2'});
 
 function customer_detail(req, res, next){
   const dyno = new AWS.DynamoDB.DocumentClient();
-  res.setHeader('Access-Control-Allow-Origin', 'https://wow.myprototype.com.au');
+  res.setHeader('Access-Control-Allow-Origin', 'https://staffportal.myprototype.com.au');
   const crn = parseInt(req.params.crn);
   console.log(`customer_detail: crn=${crn}`);
   const params = {
