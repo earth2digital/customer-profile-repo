@@ -35,11 +35,6 @@ users[APIKey] = APISecret;
 app.use(basicAuth({
     users: users
 }))
-/*app.use(basicAuth({
-    users: { 'admin' : 'admin' }
-}))
-*/
-
 
 
 // policy role to be applied on instance so that we can avoid the below.
