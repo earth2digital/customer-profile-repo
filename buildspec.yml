@@ -18,6 +18,7 @@ phases:
       - echo change directory to app ...
       - echo Installing npm
       - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+      - apt-get install nodejs
       - node -v
       - npm -v
       - pwd & cd app && npm install & npm test
