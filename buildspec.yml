@@ -22,8 +22,7 @@ phases:
       - apt-get install nodejs
       - node -v
       - npm -v
-      - npm install -g jest
-      - cd app && npm test
+      - cd app && npm install & npm test
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
