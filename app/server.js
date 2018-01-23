@@ -116,8 +116,8 @@ function search_attr(req, res, next){
   }).catch(next);
 }
 
-app.get('/customers/:crn', customer_detail);
-app.get('/customers', search_attr);
+app.get('/v1/customers/:crn', customer_detail);
+app.get('/v1/customers', search_attr);
 
 console.log(`server running at port: ${port}`);
 app.listen(port);
