@@ -166,7 +166,7 @@ test('Transform Response from CloudSearch', () => {
 4. Modify package.json
 ```
 "scripts": {
-        "test":"jest"
+        "test": "jest --forceExit"
 },
 ```
 5. Run Unit Test
