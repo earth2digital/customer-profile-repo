@@ -17,12 +17,10 @@ phases:
       - lsb_release -a
       - echo change directory to app ...
       - echo Installing npm
-      - apt-get update -y
-      - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-      - apt-get install nodejs
+      - curl -sL https://deb.nodesource.com/setup_8.x | bash -
       - node -v
       - npm -v
-      - cd app && npm install & npm test
+      - pwd & cd app && npm install & npm test
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
