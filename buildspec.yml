@@ -14,15 +14,14 @@ phases:
   install:
     commands:
       - echo change directory to app ...
-      - cd app
-      - pwd
       - echo Installing npm
-      - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-      - apt-get install nodejs
+      - apt-get update -y
+      - apt-get install -y node
+      - apt-get install -y npm
       - node -v
       - npm -v
       - npm install -g jest
-      - npm test
+      - cd app && npm test
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
