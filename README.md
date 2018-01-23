@@ -59,7 +59,28 @@ To github.com-adamaliau:earth2software/customer-profile-repo.git
    ffba2fc..5605747  master -> master
 $
 ```
-
+## How to create a new feature branch?
+- To get a baring of the updates I have made
+```
+$ git status
+```
+- Create a new branch. The below command will create a new branch from master as well checkout out that new branch at the same time
+```
+$ git checkout -b dev/uselessFeatureBranch
+```
+- do the changes/develop the new feature
+- Stage the updates for commitment
+```
+$ git add -A
+```
+- Commit updates to the branch
+```
+$ git commit -m "commiting useless feature branch"
+```
+- Push the new feature branch 
+```
+$ git push --set-upstream origin dev/uselessFeatureBranch
+```
 ## How to build local_modules
 In some cases if you need to install local modules because you don't have them in the standard npm distribution (e.g. custom built AWS JS SDK using https://sdk.amazonaws.com/builder/js/ to minimize the size of your node_modules folder).
 

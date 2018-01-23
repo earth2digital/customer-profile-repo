@@ -37,7 +37,8 @@ app.use(basicAuth({
 }))
 
 
-// policy role to be applied on instance so that we can avoid the below.
+// policy role to be applied on instance so that we can avoid the below if done we have to find
+// a way for developers to test.
 const CLOUDSEARCHDOMAIN_PARAMS = {
   endpoint: AWSCloudSearchDomainEndpoint,
   accessKeyId: APIKey,
