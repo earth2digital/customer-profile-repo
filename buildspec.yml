@@ -16,8 +16,8 @@ phases:
       - echo change directory to app ...
       - echo Installing npm
       - apt-get update -y
-      - apt-get install -y node
-      - apt-get install -y npm
+      - curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+      - apt-get install nodejs
       - node -v
       - npm -v
       - npm install -g jest
