@@ -25,7 +25,7 @@ paths:
       - "developers"
       summary: "searches inventory"
       description: "This API returns a summary list of customers who matches the query\
-        \ parameters (name, dob, etc)\n"
+        \ parameters (name, dob, etc.) from dynamoDB\n"
       operationId: "searchCustomers"
       produces:
       - "application/json"
@@ -50,7 +50,7 @@ paths:
       - "developers"
       summary: "searches inventory"
       description: "This API returns the API Profile for the customer with the customer\
-        \ Id specified by customerId\n"
+        \ Id specified by customerId from DynamoDB\n"
       operationId: "getCustomerProfile"
       produces:
       - "application/json"
