@@ -41,7 +41,7 @@ $ git remote set-url origin git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Compa
 ```
 - To get a copy of this repo
 ```
-git clone git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Company1Name}/customer-profile-repo
+$ git clone git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Company1Name}/customer-profile-repo
 ```
 - push updates
 ```
