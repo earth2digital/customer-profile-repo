@@ -13,8 +13,11 @@ version: 0.1
 phases:
   install:
     commands:
-      - echo Installing JEST ...
+      - echo change directory to app ...
       - cd app
+      - pwd
+      - echo Installing npm
+      - yum install nodejs npm --enablerepo=epel
       - npm install -g jest
       - npm test
   pre_build:
