@@ -13,6 +13,8 @@ version: 0.2
 phases:
   install:
     commands:
+      - echo linux version ...
+      - lsb_release -a
       - echo change directory to app ...
       - echo Installing npm
       - apt-get update -y
