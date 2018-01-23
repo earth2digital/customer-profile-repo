@@ -121,6 +121,74 @@ npm install
 ```
 after all is done, you commit the files to github. node_modules won't be commited as it is listed in the .gitingnore file. local_modules would get committed.
 
+## How to create nodeJS Unit Test Cases
+1. Install JEST (Facebook)
+```
+$ cd app
+$ npm install --save-dev jest-cli
+$ cat package.json
+```
+2. Create Unit Test Cases file
+```
+$ vi server.test.js
+```
+3. add the below to server.test.js (It tests return object in case no records are found)
+```
+const search_transform = require('./server.js');
+  
+test('Transform Response from CloudSearch', () => {
+  var cloudSearchResponseString = `{
+    "status": {
+        "rid": "/rnE+e4oCAqfEEs=",
+        "time-ms": 6
+    },
+    "hits": {
+        "found": 0,
+        "hit": [
+        ],
+        "start": 0
+    }
+  }`;
+
+  var cloudSearchResponseObject = JSON.parse(cloudSearchResponseString);
+
+    var expectedReturnObject = [];
+    let notFound = {};
+    notFound['crn'] = 'No records found';
+    notFound['name'] = 'No records found';
+    notFound['dateOfBirth'] = 'No records found';
+    notFound['singlelineaddress'] = 'No records found';
+    expectedReturnObject.push(notFound);
+
+    expect(search_transform(cloudSearchResponseObject)).toEqual(expectedReturnObject);
+});
+```
+4. Modify package.json
+```
+"scripts": {
+        "test":"jest"
+},
+```
+5. Run Unit Test
+```
+$ npm run test
+
+> customer-profile-api-app@0.1.0 test /Users/adam/Documents/Woolies X/customer-profile/customer-profile-repo/app
+> jest
+
+ PASS  ./server.test.js
+  ✓ Transform Response from CloudSearch (3ms)
+
+  console.log server.js:119
+    server running at port: 8080
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+Snapshots:   0 total
+Time:        1.061s
+Ran all test suites.
+$
+```
 ## .env file
 .env file is used by NodeJS code to set configuration inside the API app. 
 
