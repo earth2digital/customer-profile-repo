@@ -3,6 +3,9 @@
     "description": "This is the customer profile API app which queries customer details from AWS DynamoDB",
     "version": "0.1.0",
     "private": true,
+    "scripts": {
+        "test": "jest"
+    },
     "dependencies": {
         "aws-sdk": "^2.176.0",
         "body-parser": "^1.18.2",
@@ -12,5 +15,9 @@
         "mime": "^2.2.0",
         "my-module": "file:local_modules/my-module",
         "request": "^2.83.0"
+    },
+    "devDependencies": {
+        "jest": "^22.1.4",
+        "jest-cli": "^22.1.4"
     }
 }

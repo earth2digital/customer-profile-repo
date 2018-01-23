@@ -5,6 +5,7 @@
 *    url: https://opensource.org/licenses/MIT
 ***************************************************************/
 
+module.exports = search_transform
 const express = require('express');
 const AWS = require('aws-sdk');
 const BodyParser = require('body-parser');
