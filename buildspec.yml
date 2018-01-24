@@ -21,9 +21,10 @@ phases:
       - apt-get install nodejs
       - node -v
       - npm -v
-      - pwd && cd app && npm install && npm test
   pre_build:
     commands:
+      - echo install dependencies and running unit test cases
+      - pwd && cd app && npm install && npm test && cd ..
       - echo Logging in to Amazon ECR...
       - echo $EARTH2_AWS_ECR_REGION
       - $(aws ecr get-login --no-include-email --region $EARTH2_AWS_ECR_REGION)
