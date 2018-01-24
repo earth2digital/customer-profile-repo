@@ -27,13 +27,15 @@ $ vi config
 
 #Account1
 Host github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}
-	HostName github.com
+	HostName ssh.github.com
+	Port 443
 	User git
 	IdentityFile ~/.ssh/{KeyFileNameForAccount1}
 
 #account2
 Host github.com-{GITHUB_USERNAME_FOR_ACCOUNT2}
-	HostName github.com
+	HostName ssh.github.com
+	Port 443
 	User git
 	IdentityFile ~/.ssh/{KeyFileNameForAccount2}
 ```
