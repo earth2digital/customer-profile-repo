@@ -64,9 +64,39 @@ To github.com-adamaliau:earth2software/customer-profile-repo.git
 $
 ```
 ## How to create a new feature branch?
+- Create new directory for the new feature locally on your mac
+```
+mkdir newUselessFeature
+```
+- clone master repo
+```
+git clone git@github.com-{GITHUB_USERNAME}:earth2software/customer-profile-repo.git
+```
+- change directory to cloned master
+```
+$ cd customer-profile-repo
+```
+- List local branches you have
+```
+$ git branch
+* master
+```
+- List all local and remote branches
+```
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/SWAGGERHUB
+  remotes/origin/dev/justAnotherFeature
+  remotes/origin/master
+```
+- 
 - To get a baring of the updates I have made
 ```
 $ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
 ```
 - Create a new branch. The below command will create a new branch from master as well checkout out that new branch at the same time
 ```
