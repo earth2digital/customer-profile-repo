@@ -175,7 +175,7 @@ test('Transform Response from CloudSearch', () => {
 ```
 $ npm run test
 
-> customer-profile-api-app@0.1.0 test /Users/adam/Documents/Woolies X/customer-profile/customer-profile-repo/app
+> customer-profile-api-app@0.1.0 test 
 > jest
 
  PASS  ./server.test.js
