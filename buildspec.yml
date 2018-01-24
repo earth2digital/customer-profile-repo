@@ -21,6 +21,8 @@ phases:
       - apt-get install nodejs
       - node -v
       - npm -v
+      - ls -ltr app/node_modules/
+      - ls -ltr app/local_modules/
   pre_build:
     commands:
       - echo install dependencies and running unit test cases
