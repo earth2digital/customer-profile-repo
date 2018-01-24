@@ -45,3 +45,7 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
+# cache node_modules on S3 to speedup the build process
+cache:
+  paths:
+    - 'node_modules/**/*'
