@@ -48,4 +48,4 @@ artifacts:
 # cache node_modules on S3 to speedup the build process
 cache:
   paths:
-    - 'node_modules/**/*'
+    - 'app/node_modules/**/*'
