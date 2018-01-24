@@ -49,3 +49,4 @@ artifacts:
 cache:
   paths:
     - 'app/node_modules/**/*'
+    - 'app/local_modules/**/*'
