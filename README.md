@@ -1,7 +1,7 @@
 ![Build Status](https://codebuild.ap-southeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRC9IUEZKa2p1UDNWd29vb0dVZ1BwdzNTeldCNUJkd0Q0NDdlZGJlQjRzbDZRWTh1akN6SEtqU1hUQ2JoY25sR09mbUU5NnorcHl4WFN4blR4MUpSSXJZPSIsIml2UGFyYW1ldGVyU3BlYyI6IlNmcG8wQWtESWY4YVlQUG8iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)
 
 ## Overview
-This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
+This is a nodejs customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
 
 ## Generate and use multiple ssh keys for multiple github account
 
