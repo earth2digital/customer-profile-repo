@@ -1,7 +1,7 @@
 ## Overview
 This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
 
-## Generate and use multiple ssh keys for multiple github accounts
+## Generate and use multiple ssh keys for multiple github account
 
 - Generate SSH keys for 2 github accounts
 ```
