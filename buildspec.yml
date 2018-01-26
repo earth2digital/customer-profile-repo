@@ -10,6 +10,15 @@
 
 version: 0.2
 
+env:
+  variables:
+    E2_REPO_NAME: "customer-profile-repo"
+  parameter-store:
+    E2_IMAGE_REPO_NAME: "/CodeBuild/EARTH2_IMAGE_REPO_NAME"
+    E2_IMAGE_TAG: "/CodeBuild/EARTH2_IMAGE_TAG"
+    E2_ECS_SERVICE_CONTAINER_NAME: "/CodeBuild/EARTH2_ECS_SERVICE_CONTAINER_NAME"
+    E2_AWS_ACCOUNT_ID: "/CodeBuild/EARTH2_AWS_ACCOUNT_ID"
+    E2_AWS_ECR_REGION: "/CodeBuild/EARTH2_AWS_ECR_REGION"
 phases:
   install:
     commands:
@@ -30,21 +39,21 @@ phases:
       - npm test && cd ..
       - echo "------------------------ End of Unit Test Cases ----------------"
       - echo Logging in to Amazon ECR...
-      - echo $EARTH2_AWS_ECR_REGION
-      - $(aws ecr get-login --no-include-email --region $EARTH2_AWS_ECR_REGION)
+      - echo $E2_AWS_ECR_REGION
+      - $(aws ecr get-login --no-include-email --region $E2_AWS_ECR_REGION)
   build:
     commands:
       - echo Build started on `date`
-      - echo Building the Docker image $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG ...          
-      - docker build -t $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG .
-      - docker tag $EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG      
+      - echo Building the Docker image $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG ...          
+      - docker build -t $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG .
+      - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG      
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Pushing the Docker image to $EARTH2_AWS_ACCOUNT_ID $EARTH2_AWS_ECR_REGION ...
-      - docker push $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG
+      - echo Pushing the Docker image to $E2_AWS_ACCOUNT_ID $E2_AWS_ECR_REGION ...
+      - docker push $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"%s","imageUri":"%s"}]' $EARTH2_ECS_SERVICE_CONTAINER_NAME $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$EARTH2_AWS_ECR_REGION.amazonaws.com/$EARTH2_IMAGE_REPO_NAME:$EARTH2_IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"%s","imageUri":"%s"}]' $E2_ECS_SERVICE_CONTAINER_NAME $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
   files:
