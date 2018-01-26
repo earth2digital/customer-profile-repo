@@ -13,8 +13,6 @@ version: 0.2
 phases:
   install:
     commands:
-      - printenv
-      - echo $EARTH2_SOURCE_REPO_URL
       - echo linux version ...
       - lsb_release -a
       - echo change directory to app ...
@@ -23,12 +21,9 @@ phases:
       - apt-get install nodejs
       - node -v
       - npm -v
-      - env
+      - printenv
   pre_build:
     commands:
-      - echo $APIKey
-      - echo CODEBUILD_SOURCE_REPO_URL= $CODEBUILD_SOURCE_REPO_URL		
-      - echo CODEBUILD_SOURCE_VERSION= $CODEBUILD_SOURCE_VERSION
       - echo install dependencies and running unit test cases
       - pwd && cd app && npm install
       - echo "------------------------ Unit Test Cases -----------------------"
