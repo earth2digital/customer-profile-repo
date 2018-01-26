@@ -28,9 +28,6 @@ phases:
   pre_build:
     commands:
       - echo $APIKey
-      - REPO_NAME=`echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1` && echo $REPO_NAME
-      - echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1
-      - echo $CODEBUILD_SOURCE_REPO_URL
       - echo CODEBUILD_SOURCE_REPO_URL= $CODEBUILD_SOURCE_REPO_URL		
       - echo CODEBUILD_SOURCE_VERSION= $CODEBUILD_SOURCE_VERSION
       - echo install dependencies and running unit test cases
