@@ -12,13 +12,13 @@ version: 0.2
 
 env:
   variables:
-    REPO_NAME: `echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1`
   parameter-store:
     APIKey: "/CodeBuild/EARTH2_ECS_SERVICE_CONTAINER_NAME"
 phases:
   install:
     commands:
       - echo $APIKey
+      - $REPO_NAME=`echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1`
       - echo $REPO_NAME
       - echo linux version ...
       - lsb_release -a
