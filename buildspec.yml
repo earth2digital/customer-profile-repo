@@ -48,7 +48,7 @@ phases:
       - docker build -t $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG .
       - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG   
       - echo Define a task for the app in ECS
-      - cat /codebuild/output/tmp/script.sh
+      - cat /codebuild/output/tmp/env.sh
       - E2_RESULT=$(aws ecs list-task-definitions  --region $E2_AWS_ECR_REGION --family-prefix run-customer-profile-repo|grep task|wc -l)
       - echo $E2_RESULT
       - |
