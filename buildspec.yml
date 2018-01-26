@@ -11,11 +11,14 @@
 version: 0.2
 
 env:
+  variables:
+    EARTH2_SOURCE_REPO_URL: $CODEBUILD_SOURCE_REPO_URL
   parameter-store:
     APIKey: "/CodeBuild/EARTH2_ECS_SERVICE_CONTAINER_NAME"
 phases:
   install:
     commands:
+    - echo $EARTH2_SOURCE_REPO_URL
       - echo linux version ...
       - lsb_release -a
       - echo change directory to app ...
