@@ -11,7 +11,6 @@
 version: 0.2
 
 env:
-  variables:
   parameter-store:
     APIKey: "/CodeBuild/EARTH2_ECS_SERVICE_CONTAINER_NAME"
 phases:
