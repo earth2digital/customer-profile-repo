@@ -61,4 +61,7 @@ typings/
 # its containing folder, such as the position of icons or the choice of a background image
 .DS_Store
 
+# buildspec.yml is used by AWS CodeBuild and I don't want developers to change that file. should be changed only
+# by devOps
+buildspec.yml
 
