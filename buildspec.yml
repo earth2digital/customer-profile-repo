@@ -50,6 +50,7 @@ phases:
       - echo Define a task for the app in ECS
       - E2_RESULT=$(aws ecs list-task-definitions  --region $E2_AWS_ECR_REGION --family-prefix run-customer-profile-repo|grep task|wc -l)
       - echo $E2_RESULT
+      - if [ $E2_RESULT == 1 ];then echo equal1; else echo equal0 ;fi
   post_build:
     commands:
       - echo Build completed on `date`
