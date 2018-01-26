@@ -13,6 +13,7 @@ version: 0.2
 phases:
   install:
     commands:
+      - printenv
       - echo $EARTH2_SOURCE_REPO_URL
       - echo linux version ...
       - lsb_release -a
@@ -29,7 +30,6 @@ phases:
       - echo CODEBUILD_SOURCE_REPO_URL= $CODEBUILD_SOURCE_REPO_URL		
       - echo CODEBUILD_SOURCE_VERSION= $CODEBUILD_SOURCE_VERSION
       - echo install dependencies and running unit test cases
-      - sleep 10
       - pwd && cd app && npm install
       - echo "------------------------ Unit Test Cases -----------------------"
       - npm test && cd ..
