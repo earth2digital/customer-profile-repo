@@ -46,7 +46,7 @@ phases:
       - echo Build started on `date`
       - echo Building the Docker image $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG ...          
       - docker build -t $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG .
-      - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $EARTH2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG      
+      - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG      
   post_build:
     commands:
       - echo Build completed on `date`
