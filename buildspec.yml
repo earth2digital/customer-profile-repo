@@ -13,6 +13,8 @@ version: 0.2
 env:
   variables:
     E2_REPO_NAME: "customer-profile-repo"
+    E2_UNIT_TEST_BANNER_BEGIN: "------------------------ Unit Test Cases -----------------------"
+    E2_UNIT_TEST_BANNER_END  : "------------------------ End of Unit Test Cases ----------------"
   parameter-store:
     E2_IMAGE_REPO_NAME: "/CodeBuild/EARTH2_IMAGE_REPO_NAME"
     E2_IMAGE_TAG: "/CodeBuild/EARTH2_IMAGE_TAG"
@@ -35,9 +37,9 @@ phases:
     commands:
       - echo install dependencies and running unit test cases
       - pwd && cd app && npm install
-      - echo "------------------------ Unit Test Cases -----------------------"
+      - echo $E2_UNIT_TEST_BANNER_BEGIN
       - npm test && cd ..
-      - echo "------------------------ End of Unit Test Cases ----------------"
+      - echo $E2_UNIT_TEST_BANNER_END
       - echo Logging in to Amazon ECR...
       - echo $E2_AWS_ECR_REGION
       - $(aws ecr get-login --no-include-email --region $E2_AWS_ECR_REGION)
