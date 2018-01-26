@@ -24,6 +24,7 @@ phases:
       - apt-get install nodejs
       - node -v
       - npm -v
+      - env
   pre_build:
     commands:
       - echo $APIKey
