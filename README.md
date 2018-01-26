@@ -115,45 +115,6 @@ $ git commit -m "commiting useless feature branch"
 ```
 $ git push --set-upstream origin dev/uselessFeatureBranch
 ```
-## How to build local_modules
-In some cases if you need to install local modules because you don't have them in the standard npm distribution (e.g. custom built AWS JS SDK using https://sdk.amazonaws.com/builder/js/ to minimize the size of your node_modules folder).
-
-first you create local_modules and inside the folder you add your modules one by one. Each module would have to have package.json and optionally other files like README.md
-inside package.json including local_modules would look like that
-```
-{
-    "name": "customer-profile-api-app",
-    "description": "This is the customer profile API app which queries customer details from AWS DynamoDB",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "aws-sdk": "^2.176.0",
-        "body-parser": "^1.18.2",
-        "express": "latest",
-        "express-healthcheck": "^0.1.0",
-        "my-module": "file:local_modules/my-module",
-        "request": "^2.83.0"
-    }
-}
-```
-./local_modules/my-module/package.json
-```
-{
-    "name": "my-module",
-    "description": "This is a test for adding local_module to the app",
-    "version": "0.1.0",
-    "private": true
-}
-```
-to run npm install in a way to have local_modules included as links in node_modules, you execute the command below:
-```
-npm install --save ./local_modules/my-module
-```
-then execute the below command to get the rest of the modules that are not local_modules
-```
-npm install
-```
-after all is done, you commit the files to github. node_modules won't be commited as it is listed in the .gitingnore file. local_modules would get committed.
 
 ## How to create nodeJS Unit Test Cases
 1. Install JEST (Facebook)
