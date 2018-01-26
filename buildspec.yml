@@ -18,7 +18,7 @@ env:
 phases:
   install:
     commands:
-    - echo $EARTH2_SOURCE_REPO_URL
+      - echo $EARTH2_SOURCE_REPO_URL
       - echo linux version ...
       - lsb_release -a
       - echo change directory to app ...
