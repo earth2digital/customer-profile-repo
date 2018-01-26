@@ -17,7 +17,7 @@ phases:
   install:
     commands:
       - echo $APIKey
-      - $REPO_NAME=`echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1`
+      - REPO_NAME=`echo ${CODEBUILD_SOURCE_REPO_URL##*/}| cut -d'.' -f1`
       - echo $REPO_NAME
       - echo linux version ...
       - lsb_release -a
