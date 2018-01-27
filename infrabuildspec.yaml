@@ -33,10 +33,11 @@ Parameters:
         Default: /customer-profile-repo/DockerImageURL
 # the environment name would be modified from Codepipeline action using Override Parameter
 # values should be
-#  t: test environment
-#  u: UAT
-#  p: prod
-    EnvironmentName:
+#  dev: development environment
+#  test: test environment
+#  uat: UAT (Unit Acceptance Testing)
+#  prod: production
+    EnvironmentType:
         Type: String
 # the environment name would be modified from Codepipeline action using Override Parameter
     VPC:
@@ -91,7 +92,7 @@ Resources:
         DependsOn: ListenerRule
         Properties: 
 #            Cluster: !Ref Cluster
-            Cluster: !FindInMap [ EnvMap, !Ref "ECSClusterName", dev ]
+            Cluster: !FindInMap [ EnvMap, !Ref EnvironmentType, dev ]
             Role: "AWSServiceRoleForECS"
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
