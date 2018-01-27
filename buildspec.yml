@@ -13,8 +13,9 @@ version: 0.2
 env:
   variables:
     E2_REPO_NAME: "customer-profile-repo"
-    E2_UNIT_TEST_BANNER_BEGIN: "------------------------ Unit Test Cases -----------------------"
-    E2_UNIT_TEST_BANNER_END  : "------------------------ End of Unit Test Cases ----------------"
+    E2_ECS_CLUSTER_NAME: "ecs-dev-cluster"
+    E2_UNIT_TEST_BANNER_BEGIN: "---------------------------- Unit Test Cases ---------------------------"
+    E2_UNIT_TEST_BANNER_END  : "---------------------------- End of Unit Test Cases --------------------"
   parameter-store:
     E2_IMAGE_REPO_NAME: "/CodeBuild/EARTH2_IMAGE_REPO_NAME"
     E2_IMAGE_TAG: "/CodeBuild/EARTH2_IMAGE_TAG"
@@ -51,13 +52,21 @@ phases:
       - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG   
       - echo Define a task for the app in ECS
       - cat /codebuild/output/tmp/env.sh
-      - E2_RESULT=$(aws ecs list-task-definitions  --region $E2_AWS_ECR_REGION --family-prefix run-customer-profile-repo|grep task|wc -l)
-      - echo $E2_RESULT
+      - E2_TASK_CHECK_RESULT=$(aws ecs list-task-definitions  --region $E2_AWS_ECR_REGION --family-prefix ${E2_REPO_NAME}-task|grep ${E2_REPO_NAME}-task|wc -l)
+      - echo $E2_TASK_CHECK_RESULT
       - |
-          if [ "$E2_RESULT" = "1" ]; then
-            echo equal1
+          if [ "$E2_TASK_CHECK_RESULT" -eq 0 ]; then
+            echo "We need to create task ${E2_REPO_NAME}-task here"
           else
-            echo equal $E2_RESULT
+            echo "We don't need to create task ${E2_REPO_NAME}-task, as task already exist"
+          fi
+      - E2_SERVICE_CHECK_RESULT=$(aws ecs list-services --region $E2_AWS_ECR_REGION --cluster $E2_ECS_CLUSTER_NAME|egrep "${E2_REPO_NAME}-service\""|wc -l)
+      - echo $E2_SERVICE_CHECK_RESULT
+      - |
+          if [ "$E2_SERVICE_CHECK_RESULT" -eq 0 ]; then
+            echo "We need to create service ${E2_REPO_NAME}-service here"
+          else
+            echo "We don't need to create service ${E2_REPO_NAME}-service, as task already exist"
           fi
   post_build:
     commands:
