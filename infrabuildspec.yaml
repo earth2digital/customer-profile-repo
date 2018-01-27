@@ -17,14 +17,22 @@ Parameters:
     ApplicationName:
         Type : 'AWS::SSM::Parameter::Value<String>'
         Default: /customer-profile-repo/AppName
-
+# docker image URL would be set in the build phase and updated/created as SSM parameter
+    DockerImageURL:
+        Type : 'AWS::SSM::Parameter::Value<String>'
+        Default: /customer-profile-repo/DockerImageURL
+# the environment name would be modified from Codepipeline action using Override Parameter
+# values should be
+#  t: test environment
+#  u: UAT
+#  p: prod
     EnvironmentName:
         Type: String
-        
+# the environment name would be modified from Codepipeline action using Override Parameter
     VPC:
         Description: The VPC that the ECS cluster is deployed to
         Type: AWS::EC2::VPC::Id
-        
+# the environment name would be modified from Codepipeline action using Override Parameter
     Cluster:
         Description: Please provide the ECS Cluster ID that this service should run on
         Type: String
@@ -33,7 +41,7 @@ Parameters:
         Description: How many instances of this task should we run across our cluster?
         Type: Number
         Default: 2
-
+# the environment name would be modified from Codepipeline action using Override Parameter
     Listener:
         Description: The Application Load Balancer listener to register with
         Type: String
@@ -41,7 +49,7 @@ Parameters:
     Path: 
         Description: The path to register with the Application Load Balancer
         Type: String
-        Default: /products
+        Default: /customers*
 
         
 Resources:
@@ -65,7 +73,8 @@ Resources:
             ContainerDefinitions:
                 - Name: product-service
                   Essential: true
-                  Image: 275396840892.dkr.ecr.us-east-1.amazonaws.com/ecs-refarch-cloudformation/product-service:1.0.0
+                  Image: !Ref DockerImageURL
+#                  Image: 275396840892.dkr.ecr.us-east-1.amazonaws.com/ecs-refarch-cloudformation/product-service:1.0.0
                   Memory: 128
                   PortMappings:
                     - ContainerPort: 8080
