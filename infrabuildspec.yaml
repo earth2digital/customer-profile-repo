@@ -61,13 +61,37 @@ Parameters:
         Type: String
         Default: /customers*
 
-        
+Mappings: 
+  EnvMap: 
+    ServiceName: 
+      test: "ts-customer-profile-repo"
+      uat: "us-customer-profile-repo"
+      prod: "ps-customer-profile-repo"
+    TaskName: 
+      test: "tt-customer-profile-repo"
+      uat: "ut-customer-profile-repo"
+      prod: "pt-customer-profile-repo"
+    TargetGroupName: 
+      test: "tr-customer-profile-repo"
+      uat: "ur-customer-profile-repo"
+      prod: "pr-customer-profile-repo"
+    CloudWatchLogGroupName: 
+      test: "tl-customer-profile-repo"
+      uat: "ul-customer-profile-repo"
+      prod: "pl-customer-profile-repo"
+    ECSClusterName: 
+      dev: "ecs-dev-cluster"
+      test: "ecs-test-cluster"
+      uat: "ecs-uat-cluster"
+      prod: "ecs-prod-cluster"
+      
 Resources:
     Service: 
         Type: AWS::ECS::Service
         DependsOn: ListenerRule
         Properties: 
-            Cluster: !Ref Cluster
+#            Cluster: !Ref Cluster
+            Cluster: !FindInMap [ EnvMap, !Ref "ECSClusterName", dev ]
             Role: "AWSServiceRoleForECS"
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
