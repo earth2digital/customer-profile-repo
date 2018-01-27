@@ -1,0 +1,94 @@
+Description: >
+
+    This template will create necessary infrastructure for the deployment of nodeJS Applications. Infra would include the 
+    below:
+    1. ALB Target Group
+    2. ECS Task
+    3. ECS Service
+    
+    SSM would be used as the store for parameters
+
+Parameters:
+
+    # The following parameters are set dynamically by AWS CodePipeline 
+
+    ApplicationName:
+        Type: String
+
+    EnvironmentName:
+        Type: String
+        
+    VPC:
+        Description: The VPC that the ECS cluster is deployed to
+        Type: AWS::EC2::VPC::Id
+        
+    Cluster:
+        Description: Please provide the ECS Cluster ID that this service should run on
+        Type: String
+
+    DesiredCount: 
+        Description: How many instances of this task should we run across our cluster?
+        Type: Number
+        Default: 2
+
+    Listener:
+        Description: The Application Load Balancer listener to register with
+        Type: String
+
+    Path: 
+        Description: The path to register with the Application Load Balancer
+        Type: String
+        Default: /products
+
+        
+Resources:
+    Service: 
+        Type: AWS::ECS::Service
+        DependsOn: ListenerRule
+        Properties: 
+            Cluster: !Ref Cluster
+            Role: "AWSServiceRoleForECS"
+            DesiredCount: !Ref DesiredCount
+            TaskDefinition: !Ref TaskDefinition
+            LoadBalancers: 
+                - ContainerName: "product-service"
+                  ContainerPort: 8001
+                  TargetGroupArn: !Ref TargetGroup
+
+    TaskDefinition:
+        Type: AWS::ECS::TaskDefinition
+        Properties:
+            Family: product-service
+            ContainerDefinitions:
+                - Name: product-service
+                  Essential: true
+                  Image: 275396840892.dkr.ecr.us-east-1.amazonaws.com/ecs-refarch-cloudformation/product-service:1.0.0
+                  Memory: 128
+                  PortMappings:
+                    - ContainerPort: 8001
+                  LogConfiguration:
+                    LogDriver: awslogs
+                    Options:
+                        awslogs-group: !Ref AWS::StackName
+                        awslogs-region: !Ref AWS::Region
+    
+    CloudWatchLogsGroup:
+        Type: AWS::Logs::LogGroup
+        Properties: 
+            LogGroupName: !Ref AWS::StackName
+            RetentionInDays: 365  
+
+    TargetGroup:
+        Type: AWS::ElasticLoadBalancingV2::TargetGroup
+        Properties:
+            VpcId: !Ref VPC
+            Port: 80
+            Protocol: HTTP
+            Matcher: 
+                HttpCode: 200-299
+            HealthCheckIntervalSeconds: 10
+            HealthCheckPath: /products
+            HealthCheckProtocol: HTTP
+            HealthCheckTimeoutSeconds: 5
+            HealthyThresholdCount: 2
+    
