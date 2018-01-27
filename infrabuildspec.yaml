@@ -12,10 +12,11 @@ Parameters:
 
     # The following parameters are set dynamically by AWS CodePipeline. Add more parameters for secrets
     # currently cloudformation doesn't support retrieving parameters of type Secret from SSM
+    # At the build step we would be creating application/repo specific parameters. Every appalication 
 
     ApplicationName:
         Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: /nodejs/AppName
+        Default: /customer-profile-repo/AppName
 
     EnvironmentName:
         Type: String
