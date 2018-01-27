@@ -6,7 +6,7 @@ Description: >
     2. ECS Task
     3. ECS Service
     4. CloudWatch Logs Group
-    5. ALB Listener Rule
+    5. ALB Listener Rule to define path for the app/api requests
     
     SSM would be used as the store for parameters
     GitHub repo name would be used to name all the associated entities in the infrastructure. The name would be prefixed 
