@@ -39,6 +39,12 @@ Parameters:
 #  prod: production
     EnvironmentType:
         Type: String
+        AllowedValues: 
+            - dev
+            - test
+            - uat
+            - prod
+        Description: This is the environment variable which would be set by the action in the pipeline using functionn overrides
 # the environment name would be modified from Codepipeline action using Override Parameter
     VPC:
         Description: The VPC that the ECS cluster is deployed to
