@@ -5,9 +5,19 @@ Description: >
     1. ALB Target Group
     2. ECS Task
     3. ECS Service
+    4. CloudWatch Logs Group
+    5. ALB Listener Rule
     
     SSM would be used as the store for parameters
-
+    GitHub repo name would be used to name all the associated entities in the infrastructure. The name would be prefixed 
+    by the following prefix for each entity to avoid confisuion when troublshooting problems. The prefix would be
+    a composite of environment and entity type
+    
+    st: service in test environment e.g. st-customer-profile-repo
+    tt: task in test environment e.g. tt-customer-profile-repo
+    rt: Target group in test environment e.g. rt-customer-profile-repo
+    lt: log group in test lt-customer-profile-repo
+    
 Parameters:
 
     # The following parameters are set dynamically by AWS CodePipeline. Add more parameters for secrets
