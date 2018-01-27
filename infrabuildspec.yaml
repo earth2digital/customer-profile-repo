@@ -10,10 +10,12 @@ Description: >
 
 Parameters:
 
-    # The following parameters are set dynamically by AWS CodePipeline 
+    # The following parameters are set dynamically by AWS CodePipeline. Add more parameters for secrets
+    # currently cloudformation doesn't support retrieving parameters of type Secret from SSM
 
     ApplicationName:
-        Type: String
+        Type : 'AWS::SSM::Parameter::Value<String>'
+        Default: /nodejs/AppName
 
     EnvironmentName:
         Type: String
@@ -91,4 +93,4 @@ Resources:
             HealthCheckProtocol: HTTP
             HealthCheckTimeoutSeconds: 5
             HealthyThresholdCount: 2
-    
+            
