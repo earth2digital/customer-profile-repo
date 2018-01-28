@@ -96,8 +96,8 @@ Resources:
                   ContainerPort: 8080
                   TargetGroupArn: !Ref TargetGroup
             DeploymentConfiguration:
-                - maximumPercent: 100
-                - minimumHealthyPercent: 50
+                maximumPercent: 100
+                minimumHealthyPercent: 50
             DesiredCount: 2
             LaunchType: "EC2"
             Role: "AWSServiceRoleForECS"
