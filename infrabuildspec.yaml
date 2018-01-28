@@ -13,9 +13,9 @@ Description: >
     by the following prefix for each entity to avoid confisuion when troublshooting problems. The prefix would be
     a composite of environment and entity type
     
-    st: service in test environment e.g. st-customer-profile-repo
+    ts: service in test environment e.g. st-customer-profile-repo
     tt: task in test environment e.g. tt-customer-profile-repo
-    rt: Target group in test environment e.g. rt-customer-profile-repo
+    tr: Target group in test environment e.g. rt-customer-profile-repo
     lt: log group in test lt-customer-profile-repo
     
 Parameters:
