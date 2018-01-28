@@ -26,12 +26,12 @@ Parameters:
     # At the build step we would be creating application/repo specific parameters. Every appalication 
 
     ApplicationName:
-        Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: /customer-profile-repo/AppName
+        Type : String
+        Default: "customer-profile-repo"
 # docker image URL would be set in the build phase and updated/created as SSM parameter
     DockerImageURL:
         Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: /customer-profile-repo/DockerImageURL
+        Default: !Join ["", [ "/", !Ref ApplicationName, "/DockerImageURL"]]
 # the environment name would be modified from Codepipeline action using Override Parameter
 # values should be
 #  dev: development environment
@@ -70,17 +70,17 @@ Parameters:
     AWSCloudSearchDomainEndpoint: 
         Description: The path to register with the Application Load Balancer
         Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: /customer-profile-repo/AWSCloudSearchDomainEndpoint
+        Default: !Join ["", [ "/", !Ref ApplicationName, "/AWSCloudSearchDomainEndpoint"]]
         
     APIKey: 
         Description: The path to register with the Application Load Balancer
         Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: "/customer-profile-repo/APIKey"
+        Default: !Join ["", [ "/", !Ref ApplicationName, "/APIKey"]]
 
     APISecret: 
         Description: The path to register with the Application Load Balancer
         Type : 'AWS::SSM::Parameter::Value<String>'
-        Default: "/customer-profile-repo/APISecret"
+        Default: !Join ["", [ "/", !Ref ApplicationName, "/APISecret"]]
         
 Resources:
     Service: 
