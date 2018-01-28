@@ -39,12 +39,12 @@ phases:
       - echo install dependencies and running unit test cases
       - pwd && cd app && npm install
       - echo $E2_UNIT_TEST_BANNER_BEGIN
-      - npm test && cd ..
+      - npm test
       - echo $E2_UNIT_TEST_BANNER_END
       - echo "remove node_modules to remove JEST dependencies"
       - rm -rf node_modules
       - echo "install all dependencies except devDependencies"
-      - npm install --only=production
+      - npm install --only=production && cd ..
       - echo Logging in to Amazon ECR...
       - echo $E2_AWS_ECR_REGION
       - $(aws ecr get-login --no-include-email --region $E2_AWS_ECR_REGION)
