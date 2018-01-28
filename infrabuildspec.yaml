@@ -50,6 +50,7 @@ Parameters:
     VPC:
         Description: The VPC that the ECS cluster is deployed to
         Type: AWS::EC2::VPC::Id
+        Default: "vpc-844d8ae3"
 # the environment name would be modified from Codepipeline action using Override Parameter
     Cluster:
         Description: Please provide the ECS Cluster ID that this service should run on
@@ -63,12 +64,28 @@ Parameters:
     Listener:
         Description: The Application Load Balancer listener to register with
         Type: String
+        Default: "arn:aws:elasticloadbalancing:ap-southeast-2:954147410461:listener/app/ecs-dev-cluster-alb/99d5b75a22649025/975d70460864188b"
 
     Path: 
         Description: The path to register with the Application Load Balancer
         Type: String
-        Default: /customers*
+        Default: "/v1/customers*"
+        
+    AWSCloudSearchDomainEndpoint: 
+        Description: The path to register with the Application Load Balancer
+        Type : 'AWS::SSM::Parameter::Value<String>'
+        Default: /customer-profile-repo/AWSCloudSearchDomainEndpoint
+        
+    APIKey: 
+        Description: The path to register with the Application Load Balancer
+        Type : 'AWS::SSM::Parameter::Value<String>'
+        Default: "/customer-profile-repo/APIKey"
 
+    APISecret: 
+        Description: The path to register with the Application Load Balancer
+        Type : 'AWS::SSM::Parameter::Value<String>'
+        Default: "/customer-profile-repo/APISecret"
+        
 Resources:
     Service: 
         Type: AWS::ECS::Service
@@ -80,53 +97,74 @@ Resources:
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
             LoadBalancers: 
-                - ContainerName: "product-service"
+                - ContainerName: !Join ["-", [ !Ref EnvironmentType, , "c", !Ref ApplicationName]]
                   ContainerPort: 8080
                   TargetGroupArn: !Ref TargetGroup
+            DeploymentConfiguration:
+                - maximumPercent: 100
+                - minimumHealthyPercent: 50
+            DesiredCount: 2
+            LaunchType: "EC2"
+            Role: "AWSServiceRoleForECS"
 
     TaskDefinition:
         Type: AWS::ECS::TaskDefinition
         Properties:
-            Family: product-service
+            Family: !Join ["-", [ !Ref EnvironmentType, , "tsk", !Ref ApplicationName]]
+            NetworkMode: "bridge"
             ContainerDefinitions:
-                - Name: product-service
+                - Name: !Join ["-", [ !Ref EnvironmentType, , "c", !Ref ApplicationName]]
                   Essential: true
                   Image: !Ref DockerImageURL
-#                  Image: 275396840892.dkr.ecr.us-east-1.amazonaws.com/ecs-refarch-cloudformation/product-service:1.0.0
                   Memory: 128
+                  Cpu: 0
+                  Essential: true
                   PortMappings:
                     - ContainerPort: 8080
+                    - HostPort: 0
+                    - Protocol: "tcp"
+                  WorkingDirectory: "/opt/app"
+                  Environment:
+                    - "name": "APIKey" 
+                      "value" : !Ref APIKey
+                    - "name" : "APISecret" 
+                      "value" : !Ref APISecret
+                    - "name": "AWSCloudSearchDomainEndpoint" 
+                      "value" : !Ref AWSCloudSearchDomainEndpoint
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
-                        awslogs-group: !Ref AWS::StackName
+                        awslogs-group: !Ref !Join ["-", [ !Ref EnvironmentType, , "lgrp", !Ref ApplicationName]]
                         awslogs-region: !Ref AWS::Region
     
     CloudWatchLogsGroup:
         Type: AWS::Logs::LogGroup
         Properties: 
-            LogGroupName: !Ref AWS::StackName
-            RetentionInDays: 365  
+            LogGroupName: !Ref !Join ["-", [ !Ref EnvironmentType, , "lgrp", !Ref ApplicationName]]
+            RetentionInDays: 15  
 
     TargetGroup:
         Type: AWS::ElasticLoadBalancingV2::TargetGroup
         Properties:
+            TargetGroupName: !Ref !Join ["-", [ !Ref EnvironmentType, , "tgrp", !Ref ApplicationName]]
             VpcId: !Ref VPC
             Port: 80
             Protocol: HTTP
             Matcher: 
                 HttpCode: 200
-            HealthCheckIntervalSeconds: 10
+            HealthCheckIntervalSeconds: 30
             HealthCheckPath: /healthcheck
             HealthCheckProtocol: HTTP
             HealthCheckTimeoutSeconds: 5
-            HealthyThresholdCount: 2
+            HealthyThresholdCount: 5
+            UnhealthyThresholdCount: 2
+            TargetType: "instance"
             
      ListenerRule:
         Type: AWS::ElasticLoadBalancingV2::ListenerRule
         Properties:
             ListenerArn: !Ref Listener
-            Priority: 2
+            Priority: 1
             Conditions:
                 - Field: path-pattern
                   Values: 
