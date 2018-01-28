@@ -120,12 +120,12 @@ Resources:
                     - Protocol: "tcp"
                   WorkingDirectory: "/opt/app"
                   Environment:
-                    - "name": "APIKey" 
-                      "value" : !Ref APIKey
-                    - "name" : "APISecret" 
-                      "value" : !Ref APISecret
-                    - "name": "AWSCloudSearchDomainEndpoint" 
-                      "value" : !Ref AWSCloudSearchDomainEndpoint
+                    - Name : "APIKey" 
+                      Value : !Ref APIKey
+                    - Name : "APISecret" 
+                      Value : !Ref APISecret
+                    - Name : "AWSCloudSearchDomainEndpoint" 
+                      Value : !Ref AWSCloudSearchDomainEndpoint
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
@@ -141,7 +141,7 @@ Resources:
     TargetGroup:
         Type: AWS::ElasticLoadBalancingV2::TargetGroup
         Properties:
-            TargetGroupName: !Join ["-", [ !Ref EnvironmentType, "tgrp", !Ref ApplicationName]]
+            Name: !Join ["-", [ !Ref EnvironmentType, "tgrp", !Ref ApplicationName]]
             VpcId: !Ref VPC
             Port: 80
             Protocol: HTTP
