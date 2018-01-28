@@ -18,6 +18,25 @@ Description: >
     tr: Target group in test environment e.g. rt-customer-profile-repo
     lt: log group in test lt-customer-profile-repo
     
+    NOTE: Trusted entities for role ECSRoleForCF has to have the below
+    
+    {
+     "Version": "2012-10-17",
+     "Statement": [
+        {
+            "Sid": "",
+            "Effect": "Allow",
+            "Principal": {
+            "Service": [
+              "ecs-tasks.amazonaws.com",
+              "ecs.amazonaws.com"
+            ]
+        },
+        "Action": "sts:AssumeRole"
+       }
+     ]
+    }
+    
 Parameters:
 
     # The following parameters are set dynamically by AWS CodePipeline. Add more parameters for secrets
