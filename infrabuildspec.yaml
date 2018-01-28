@@ -69,46 +69,13 @@ Parameters:
         Type: String
         Default: /customers*
 
-Mappings: 
-  EnvMap: 
-    ServiceName: 
-      dev: "ds-customer-profile-repo"
-      test: "ts-customer-profile-repo"
-      uat: "us-customer-profile-repo"
-      prod: "ps-customer-profile-repo"
-    TaskName: 
-      dev: "dt-customer-profile-repo"
-      test: "tt-customer-profile-repo"
-      uat: "ut-customer-profile-repo"
-      prod: "pt-customer-profile-repo"
-    TargetGroupName: 
-      dev: "dr-customer-profile-repo"
-      test: "tr-customer-profile-repo"
-      uat: "ur-customer-profile-repo"
-      prod: "pr-customer-profile-repo"
-    CloudWatchLogGroupName: 
-      dev: "dl-customer-profile-repo"
-      test: "tl-customer-profile-repo"
-      uat: "ul-customer-profile-repo"
-      prod: "pl-customer-profile-repo"
-    ECSClusterName: 
-      dev: "ecs-dev-cluster"
-      test: "ecs-test-cluster"
-      uat: "ecs-uat-cluster"
-      prod: "ecs-prod-cluster"
-    ContainerName: 
-      dev: "dc-customer-profile-repo"
-      test: "tc-customer-profile-repo"
-      uat: "uc-customer-profile-repo"
-      prod: "pc-customer-profile-repo"
-      
 Resources:
     Service: 
         Type: AWS::ECS::Service
         DependsOn: ListenerRule
         Properties: 
-#            Cluster: !Ref Cluster
-            Cluster: !FindInMap [ EnvMap, !Ref ServiceName, EnvironmentType]
+            Cluster: !Join ["-", [ "ecs", !Ref EnvironmentType, , "cluster"]]
+            serviceName: !Join ["-", [ !Ref EnvironmentType, , "s", !Ref ApplicationName]]
             Role: "AWSServiceRoleForECS"
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
