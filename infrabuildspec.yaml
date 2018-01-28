@@ -100,7 +100,7 @@ Resources:
                 MinimumHealthyPercent: 50
             DesiredCount: 2
             LaunchType: "EC2"
-            Role: "AWSServiceRoleForECS"
+            Role: "cloudformationdevrole"
 
     TaskDefinition:
         Type: AWS::ECS::TaskDefinition
