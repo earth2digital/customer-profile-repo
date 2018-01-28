@@ -3,7 +3,7 @@ Description: >
     This template will create necessary infrastructure for the deployment of nodeJS Applications. Infra would include the 
     below:
     1. ALB Target Group
-    2. ECS Task
+    2. ECS Task (Would include the container)
     3. ECS Service
     4. CloudWatch Logs Group
     5. ALB Listener Rule to define path for the app/api requests
@@ -15,6 +15,7 @@ Description: >
     
     ts: service in test environment e.g. st-customer-profile-repo
     tt: task in test environment e.g. tt-customer-profile-repo
+    tc: container in test environment e.g. tc-customer-profile-repo
     tr: Target group in test environment e.g. rt-customer-profile-repo
     lt: log group in test lt-customer-profile-repo
     
@@ -71,18 +72,22 @@ Parameters:
 Mappings: 
   EnvMap: 
     ServiceName: 
+      dev: "ds-customer-profile-repo"
       test: "ts-customer-profile-repo"
       uat: "us-customer-profile-repo"
       prod: "ps-customer-profile-repo"
     TaskName: 
+      dev: "dt-customer-profile-repo"
       test: "tt-customer-profile-repo"
       uat: "ut-customer-profile-repo"
       prod: "pt-customer-profile-repo"
     TargetGroupName: 
+      dev: "dr-customer-profile-repo"
       test: "tr-customer-profile-repo"
       uat: "ur-customer-profile-repo"
       prod: "pr-customer-profile-repo"
     CloudWatchLogGroupName: 
+      dev: "dl-customer-profile-repo"
       test: "tl-customer-profile-repo"
       uat: "ul-customer-profile-repo"
       prod: "pl-customer-profile-repo"
@@ -91,6 +96,11 @@ Mappings:
       test: "ecs-test-cluster"
       uat: "ecs-uat-cluster"
       prod: "ecs-prod-cluster"
+    ContainerName: 
+      dev: "dc-customer-profile-repo"
+      test: "tc-customer-profile-repo"
+      uat: "uc-customer-profile-repo"
+      prod: "pc-customer-profile-repo"
       
 Resources:
     Service: 
