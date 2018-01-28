@@ -1,41 +1,23 @@
 Description: >
-    This template will create necessary infrastructure for the deployment of nodeJS Applications. Infra would include the 
-    below:
+    This template will create necessary infrastructure for the deployment of nodeJS Applications. That would include:
     1. ALB Target Group
     2. ECS Task (Would include the container)
     3. ECS Service
     4. CloudWatch Logs Group
-    5. ALB Listener Rule to define path for the app/api requests
+    5. ALB Listener Rule (defines path for routing app/api requests)
     
-    SSM would be used as the store for parameters
-    GitHub repo name would be used to name all the associated entities in the infrastructure. The name would be prefixed 
-    by the following prefix for each entity to avoid confisuion when troublshooting problems. The prefix would be
-    a composite of environment and entity type
+    SSM would be used as the store for parameters. GitHub repo name would be used to name all the associated entities 
+    above.
     
-    ts: service in test environment e.g. st-customer-profile-repo
-    tt: task in test environment e.g. tt-customer-profile-repo
-    tc: container in test environment e.g. tc-customer-profile-repo
-    tr: Target group in test environment e.g. rt-customer-profile-repo
-    lt: log group in test lt-customer-profile-repo
+    {envType}-{entityabbreviation}-{GitHubRepoName}
     
-    NOTE: Trusted entities for role ECSRoleForCF has to have the below
+    dev-srv-customer-profile-repo: service in dev environment
+    dev-srv-customer-profile-repo: task in dev environment
+    dev-c-customer-profile-repo: container in dev environment 
+    dev-tgrp-customer-profile-repo: Target group in dev environment 
+    dev-lgrp-customer-profile-repo: log group in dev
     
-    {
-     "Version": "2012-10-17",
-     "Statement": [
-        {
-            "Sid": "",
-            "Effect": "Allow",
-            "Principal": {
-            "Service": [
-              "ecs-tasks.amazonaws.com",
-              "ecs.amazonaws.com"
-            ]
-        },
-        "Action": "sts:AssumeRole"
-       }
-     ]
-    }
+    NOTE: Trusted entities for role ECSRoleForCF has to have ecs-tasks.amazonaws.com and ecs.amazonaws.com
     
 Parameters:
 
