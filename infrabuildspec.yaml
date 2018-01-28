@@ -1,5 +1,4 @@
 Description: >
-
     This template will create necessary infrastructure for the deployment of nodeJS Applications. Infra would include the 
     below:
     1. ALB Target Group
@@ -87,13 +86,13 @@ Resources:
         Type: AWS::ECS::Service
         DependsOn: ListenerRule
         Properties: 
-            Cluster: !Join ["-", [ "ecs", !Ref EnvironmentType, , "cluster"]]
-            serviceName: !Join ["-", [ !Ref EnvironmentType, , "s", !Ref ApplicationName]]
+            Cluster: !Join ["-", [ "ecs", !Ref EnvironmentType, "cluster"]]
+            serviceName: !Join ["-", [ !Ref EnvironmentType, "s", !Ref ApplicationName]]
             Role: "AWSServiceRoleForECS"
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
             LoadBalancers: 
-                - ContainerName: !Join ["-", [ !Ref EnvironmentType, , "c", !Ref ApplicationName]]
+                - ContainerName: !Join ["-", [ !Ref EnvironmentType, "c", !Ref ApplicationName]]
                   ContainerPort: 8080
                   TargetGroupArn: !Ref TargetGroup
             DeploymentConfiguration:
@@ -106,10 +105,10 @@ Resources:
     TaskDefinition:
         Type: AWS::ECS::TaskDefinition
         Properties:
-            Family: !Join ["-", [ !Ref EnvironmentType, , "tsk", !Ref ApplicationName]]
+            Family: !Join ["-", [ !Ref EnvironmentType, "tsk", !Ref ApplicationName]]
             NetworkMode: "bridge"
             ContainerDefinitions:
-                - Name: !Join ["-", [ !Ref EnvironmentType, , "c", !Ref ApplicationName]]
+                - Name: !Join ["-", [ !Ref EnvironmentType, "c", !Ref ApplicationName]]
                   Essential: true
                   Image: !Ref DockerImageURL
                   Memory: 128
@@ -130,19 +129,19 @@ Resources:
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
-                        awslogs-group: !Ref !Join ["-", [ !Ref EnvironmentType, , "lgrp", !Ref ApplicationName]]
+                        awslogs-group: !Join ["-", [ !Ref EnvironmentType, "lgrp", !Ref ApplicationName]]
                         awslogs-region: !Ref AWS::Region
     
     CloudWatchLogsGroup:
         Type: AWS::Logs::LogGroup
         Properties: 
-            LogGroupName: !Ref !Join ["-", [ !Ref EnvironmentType, , "lgrp", !Ref ApplicationName]]
+            LogGroupName: !Join ["-", [ !Ref EnvironmentType, "lgrp", !Ref ApplicationName]]
             RetentionInDays: 15  
 
     TargetGroup:
         Type: AWS::ElasticLoadBalancingV2::TargetGroup
         Properties:
-            TargetGroupName: !Ref !Join ["-", [ !Ref EnvironmentType, , "tgrp", !Ref ApplicationName]]
+            TargetGroupName: !Join ["-", [ !Ref EnvironmentType, "tgrp", !Ref ApplicationName]]
             VpcId: !Ref VPC
             Port: 80
             Protocol: HTTP
@@ -156,7 +155,7 @@ Resources:
             UnhealthyThresholdCount: 2
             TargetType: "instance"
             
-     ListenerRule:
+    ListenerRule:
         Type: AWS::ElasticLoadBalancingV2::ListenerRule
         Properties:
             ListenerArn: !Ref Listener
@@ -168,4 +167,3 @@ Resources:
             Actions:
                 - TargetGroupArn: !Ref TargetGroup
                   Type: forward
-            
