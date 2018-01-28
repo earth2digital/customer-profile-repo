@@ -87,7 +87,7 @@ Resources:
         DependsOn: ListenerRule
         Properties: 
             Cluster: !Join ["-", [ "ecs", !Ref EnvironmentType, "cluster"]]
-            ServiceName: !Join ["-", [ !Ref EnvironmentType, "s", !Ref ApplicationName]]
+      #      ServiceName: !Join ["-", [ !Ref EnvironmentType, "s", !Ref ApplicationName]]
             Role: "AWSServiceRoleForECS"
             DesiredCount: !Ref DesiredCount
             TaskDefinition: !Ref TaskDefinition
