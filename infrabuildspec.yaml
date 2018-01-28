@@ -159,7 +159,7 @@ Resources:
         Type: AWS::ElasticLoadBalancingV2::ListenerRule
         Properties:
             ListenerArn: !Ref Listener
-            Priority: 1
+            Priority: 3
             Conditions:
                 - Field: path-pattern
                   Values: 
