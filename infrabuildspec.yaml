@@ -116,8 +116,8 @@ Resources:
                   Essential: true
                   PortMappings:
                     - ContainerPort: 8080
-                    - HostPort: 0
-                    - Protocol: "tcp"
+                      HostPort: 0
+                      Protocol: "tcp"
                   WorkingDirectory: "/opt/app"
                   Environment:
                     - Name : "APIKey" 
@@ -136,7 +136,7 @@ Resources:
         Type: AWS::Logs::LogGroup
         Properties: 
             LogGroupName: !Join ["-", [ !Ref EnvironmentType, "lgrp", !Ref ApplicationName]]
-            RetentionInDays: 15  
+            RetentionInDays: 14
 
     TargetGroup:
         Type: AWS::ElasticLoadBalancingV2::TargetGroup
