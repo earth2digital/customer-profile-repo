@@ -19,7 +19,7 @@ $ ssh-add ~/.ssh/{KeyFileNameForAccount2}
 ```
 $ ssh-add -l
 ```
-- Modify ssh config file
+- Modify ssh config file. Port 443 combined with ssh.github.com would make sure that you don't have problems with firewalls if any. Firewalls usually block outbound connections to any ports other than 443 or 80
 ```
 $ cd ~/.ssh/
 $ touch config
@@ -67,6 +67,7 @@ $
 - Create new directory for the new feature locally on your mac
 ```
 mkdir newUselessFeature
+cd newUselessFeature
 ```
 - clone master repo
 ```
