@@ -54,7 +54,7 @@ Parameters:
     DesiredCount: 
         Description: How many instances of this task should we run across our cluster?
         Type: Number
-        Default: 2
+        Default: "2"
 # the environment name would be modified from Codepipeline action using Override Parameter
     Listener:
         Description: The Application Load Balancer listener to register with
