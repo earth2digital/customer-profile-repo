@@ -134,6 +134,7 @@ Resources:
                   MountPoints:
                       - SourceVolume: "env-config-vol"
                         ContainerPath: "/home/ubuntu/workspace" 
+                        ReadOnly: true
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
