@@ -228,6 +228,12 @@ $ docker logs a83a35aa19c97cca5a8bd925ccd529a6ee28af755b2f587847232ee57db9c575
 server running at port: 8080
 $
 ```
+- Login to a docker container
+```
+docker exec -it {ContainerID} /bin/sh
+
+docker exec -it a83a35aa19c97cca5a8bd925ccd529a6ee28af755b2f587847232ee57db9c575 /bin/sh
+```
 - Test App/API
 ```
 $ curl http://localhost:80/customers?name=adam
