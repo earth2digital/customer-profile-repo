@@ -73,14 +73,15 @@ Parameters:
         Default: "/customer-profile-repo/AWSCloudSearchDomainEndpoint"
         
     APIKey: 
-        Description: The path to register with the Application Load Balancer
+        Description: this is the api key used to identify entities accessing the service
         Type : 'AWS::SSM::Parameter::Value<String>'
         Default: "/customer-profile-repo/APIKey"
 
     APISecret: 
-        Description: The path to register with the Application Load Balancer
+        Description: this is the API secret
         Type : 'AWS::SSM::Parameter::Value<String>'
         Default: "/customer-profile-repo/APISecret"
+        NoEcho: true
         
 Resources:
     Service: 
