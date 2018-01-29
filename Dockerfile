@@ -17,6 +17,7 @@ FROM alpine:3.7
 #    This will be the working directory for your application
 
 WORKDIR /opt/app
+RUN mkdir /home/ubuntu/workspace
 
 # 3. copy files from app directory on soucre to /opt/app directory of docker image
 #    .env would be executed as a parameter to --env-file
