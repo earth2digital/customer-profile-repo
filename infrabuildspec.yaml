@@ -1,5 +1,6 @@
 Description: >
-    This template will create necessary infrastructure for the deployment of nodeJS Applications. That would include:
+    This AWS cloudformation template will create necessary infrastructure for the deployment of nodeJS Applications. 
+    That would include:
     1. ALB Target Group
     2. ECS Task (Would include the container)
     3. ECS Service
@@ -15,7 +16,7 @@ Description: >
     dev-srv-customer-profile-repo: task in dev environment
     dev-c-customer-profile-repo: container in dev environment 
     dev-tgrp-customer-profile-repo: Target group in dev environment 
-    dev-lgrp-customer-profile-repo: log group in dev
+    dev-lgrp-customer-profile-repo: log group in dev environment
     
     NOTE: Trusted entities for role ECSRoleForCF has to have ecs-tasks.amazonaws.com and ecs.amazonaws.com
     
