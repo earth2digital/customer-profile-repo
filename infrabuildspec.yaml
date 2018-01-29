@@ -109,9 +109,9 @@ Resources:
             Family: !Join ["-", [ !Ref EnvironmentType, "tsk", !Ref ApplicationName]]
             NetworkMode: "bridge"
             Volumes:
-                - Name: "env-config-vol"
-                  Host:
-                  SourcePath: !Join ["", [ "/opt/", !Ref ApplicationName, "/config"]]
+                - Host:
+                      SourcePath: !Join ["", [ "/opt/", !Ref ApplicationName, "/config"]]
+                  Name: "env-config-vol"
             ContainerDefinitions:
                 - Name: !Join ["-", [ !Ref EnvironmentType, "c", !Ref ApplicationName]]
                   Essential: true
