@@ -108,6 +108,10 @@ Resources:
         Properties:
             Family: !Join ["-", [ !Ref EnvironmentType, "tsk", !Ref ApplicationName]]
             NetworkMode: "bridge"
+            Volumes:
+                - Name: "env-config-vol"
+                  Host:
+                  SourcePath: !Join ["", [ "/opt/", !Ref ApplicationName, "/config"]]
             ContainerDefinitions:
                 - Name: !Join ["-", [ !Ref EnvironmentType, "c", !Ref ApplicationName]]
                   Essential: true
@@ -127,11 +131,15 @@ Resources:
                       Value : !Ref APISecret
                     - Name : "AWSCloudSearchDomainEndpoint" 
                       Value : !Ref AWSCloudSearchDomainEndpoint
+                  MountPoints:
+                      - SourceVolume: "env-config-vol"
+                        ContainerPath: "/home/ubuntu/workspace" 
                   LogConfiguration:
                     LogDriver: awslogs
                     Options:
                         awslogs-group: !Join ["-", [ !Ref EnvironmentType, "lgrp", !Ref ApplicationName]]
                         awslogs-region: !Ref AWS::Region
+
     
     CloudWatchLogsGroup:
         Type: AWS::Logs::LogGroup
