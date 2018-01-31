@@ -96,6 +96,7 @@ function search_attr(req, res, next){
   const cloudsearchdomain = new AWS.CloudSearchDomain(CLOUDSEARCHDOMAIN_PARAMS);
   //added by Adam to allow CORS
   res.setHeader('Access-Control-Allow-Origin', 'https://wow.myprototype.com.au');
+  res.setHeader('Content-Type', 'application/json');
   let attr = Object.keys(req.query)[0];
   let value = req.query[attr];
   let params = {
