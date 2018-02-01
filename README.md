@@ -39,6 +39,10 @@ Host github.com-{GITHUB_USERNAME_FOR_ACCOUNT2}
 	User git
 	IdentityFile ~/.ssh/{KeyFileNameForAccount2}
 ```
+- Change Permissions on config
+```
+$ chmod 600 ~/.ssh/config
+```
 - Set URL for Git
 ```
 $ git remote set-url origin git@github.com-{GITHUB_USERNAME_FOR_ACCOUNT1}:{Company1Name}/customer-profile-repo.git
