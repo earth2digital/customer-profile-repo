@@ -5,6 +5,8 @@
 ![Functional Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Functional-status.svg)
 ![Security Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Security-status.svg)
 ![Performance Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Performance-status.svg)
+
+<img href="https://media-assets.myprototype.com.au/github/badges/readyAPI-Functional-status.svg">
 ---
 ## Overview
 This is a nodeJS customer profile repo to demo E2E Architecture Design for customer profile API. This API returns the customer profile details from AWS DynamoDB database. 
