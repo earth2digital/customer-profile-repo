@@ -1,3 +1,4 @@
+<img src="https://media-assets.myprototype.com.au/github/badges/readyAPI-Security-status.svg?sanitize=true">
 
 [![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/aws-codebuild.svg)](https://support.smartbear.com/readyapi/docs/index.html) | [![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/readyAPI-E2EQA.svg)](https://support.smartbear.com/readyapi/docs/index.html)
 ------------ | -------------
