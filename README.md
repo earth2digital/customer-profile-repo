@@ -1,8 +1,7 @@
 
-<a> <img src="https://media-assets.myprototype.com.au/github/badges/readyAPI-Performance-status.svg"></a>
 ![Build Status](https://codebuild.ap-southeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRC9IUEZKa2p1UDNWd29vb0dVZ1BwdzNTeldCNUJkd0Q0NDdlZGJlQjRzbDZRWTh1akN6SEtqU1hUQ2JoY25sR09mbUU5NnorcHl4WFN4blR4MUpSSXJZPSIsIml2UGFyYW1ldGVyU3BlYyI6IlNmcG8wQWtESWY4YVlQUG8iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)  ![Unit Test StatusE](https://media-assets.myprototype.com.au/github/badges/JEST-UT-status.svg) 
 ---
-![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/readyAPI-E2EQA.svg) 
+[![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/readyAPI-E2EQA.svg)](https://support.smartbear.com/readyapi/docs/index.html)
 
 ![Functional Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Functional-status.svg)
 ![Security Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Security-status.svg)
