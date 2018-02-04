@@ -4,7 +4,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "test": "jest --forceExit"
+        "test": "jest --forceExit --json --outputFile=customer-profile-api-app-utest-results.json"
     },
     "dependencies": {
         "aws-sdk": "^2.176.0",
