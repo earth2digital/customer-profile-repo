@@ -34,7 +34,7 @@ phases:
       - node -v
       - npm -v
       - printenv
-      - sudo yum install -y nfs-utils
+      - apt-get install nfs-common
   pre_build:
     commands:
       - echo install dependencies and running unit test cases
