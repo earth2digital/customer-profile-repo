@@ -34,7 +34,7 @@ phases:
       - node -v
       - npm -v
       - printenv
-      - apt-get install nfs-common
+      - apt-get -y install nfs-common
   pre_build:
     commands:
       - echo install dependencies and running unit test cases
