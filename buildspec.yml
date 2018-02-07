@@ -84,6 +84,10 @@ phases:
       - ls -ltr $CODEBUILD_SRC_DIR/
       - chmod +x $CODEBUILD_SRC_DIR/mountefs.sh
       - $CODEBUILD_SRC_DIR/mountefs.sh
+      - echo "create app directory under efs"
+      - mkdir -p /efs/$E2_REPO_NAME
+      - echo $E2_AWS_ACCOUNT_ID >> /efs/$E2_REPO_NAME/.env
+      - cat /efs/$E2_REPO_NAME/.env
 artifacts:
   files:
     - imagedefinitions.json
