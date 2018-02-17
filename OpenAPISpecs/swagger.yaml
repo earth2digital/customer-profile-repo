@@ -47,7 +47,7 @@ paths:
         description: "pass an optional search string for looking up inventory"
         required: true
         type: "string"
-        default: "adam"
+        default: "jack"
       responses:
         200:
           description: "search results matching criteria"
@@ -73,6 +73,7 @@ paths:
         description: "Numeric ID of the customer to get."
         required: true
         type: "integer"
+        default: 120000040
       responses:
         200:
           description: "search results matching criteria"
