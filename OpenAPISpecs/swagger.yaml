@@ -61,8 +61,26 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/customerList"
-        400:
-          description: "bad input parameter"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "NotFound"
+          schema:
+            $ref: "#/definitions/Error"
+        504:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
   /v1/customers/{customerId}:
     get:
       tags:
@@ -93,9 +111,34 @@ paths:
             type: "array"
             items:
               $ref: "#/definitions/customerProfile"
-        400:
-          description: "bad input parameter"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "NotFound"
+          schema:
+            $ref: "#/definitions/Error"
+        504:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
+  Error:
+    type: "object"
+    properties:
+      errors:
+        type: "array"
+        items:
+          $ref: "#/definitions/Error_errors"
   customerProfile:
     type: "object"
     required:
@@ -158,3 +201,39 @@ definitions:
       id: "120001415"
       singlelineaddress: "201 40 46 Shoreline Drive"
       lastname: "jack"
+  Error_errors:
+    properties:
+      status:
+        type: "integer"
+        description: "application-specific error code"
+      code:
+        type: "string"
+        description: "application-specific error code"
+      message:
+        type: "string"
+        description: "human-readable summary of the problem"
+responses:
+  400:
+    description: "Bad Request"
+    schema:
+      $ref: "#/definitions/Error"
+  401:
+    description: "Unauthorized"
+    schema:
+      $ref: "#/definitions/Error"
+  403:
+    description: "Forbidden"
+    schema:
+      $ref: "#/definitions/Error"
+  404:
+    description: "NotFound"
+    schema:
+      $ref: "#/definitions/Error"
+  504:
+    description: "Gateway Timeout"
+    schema:
+      $ref: "#/definitions/Error"
+  default:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/Error"
