@@ -172,13 +172,16 @@ definitions:
     - "status"
     properties:
       status:
-        type: "integer"
+        type: "string"
+        example: "OK"
         description: "application-specific error code"
       code:
         type: "string"
+        example: "1010"
         description: "application-specific error code"
       message:
         type: "string"
+        example: "human-readable summary of the problem"
         description: "human-readable summary of the problem"
   customerProfile:
     type: "object"
