@@ -24,8 +24,8 @@ info:
   license:
     name: "MIT License"
     url: "https://opensource.org/licenses/MIT"
-host: "virtserver.swaggerhub.com"
-basePath: "/Earth2Software/customer-profile-api/1.0.0"
+host: "api-ecs-dev.myprototype.com.au"
+basePath: "/v1/customers"
 tags:
 - name: "01 Profile Queries (Read)"
   description: "Operations available to query customer profile"
