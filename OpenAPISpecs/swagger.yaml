@@ -30,8 +30,6 @@ tags:
   description: "Operations available to query customer profile"
 schemes:
 - "https"
-security:
-- basicAuth: []
 paths:
   /v1/customers:
     get:
@@ -44,6 +42,12 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Authorization Header"
+        required: true
+        type: "string"
+        default: "Basic QUtJQUo1WloyNldXR1hWVjNPT0E6Y0FZTXV3T0YrK3NYTDdrc20vTG5YYUNFU1dJVGE4TXpBQXpiaEdiOQ=="
       - name: "name"
         in: "query"
         description: "pass an optional search string for looking up inventory"
@@ -70,6 +74,12 @@ paths:
       produces:
       - "application/json"
       parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Authorization Header"
+        required: true
+        type: "string"
+        default: "Basic QUtJQUo1WloyNldXR1hWVjNPT0E6Y0FZTXV3T0YrK3NYTDdrc20vTG5YYUNFU1dJVGE4TXpBQXpiaEdiOQ=="
       - name: "customerId"
         in: "path"
         description: "Numeric ID of the customer to get."
@@ -85,9 +95,6 @@ paths:
               $ref: "#/definitions/customerProfile"
         400:
           description: "bad input parameter"
-securityDefinitions:
-  basicAuth:
-    type: "basic"
 definitions:
   customerProfile:
     type: "object"
