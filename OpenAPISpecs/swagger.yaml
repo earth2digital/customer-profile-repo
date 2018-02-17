@@ -1,119 +1,286 @@
 ---
 swagger: "2.0"
 info:
-  description: "This isa demo API for customer profile"
+  description: "\nThe profile management microservice enables access to customer data\
+    \ to add, update, retrieve or remove customer profiles. \n\nDesign Reference -\
+    \ [Customer Profile Management Microservice](https://drive.google.com/file/d/sampleurl/view?usp=sharing)\n\
+    \n## Profile management microservice has the following functions:\n- Register\
+    \ a new customer\n- Search customers by name\n- Get customer profile by Id\n-\
+    \ Update customer profile\n- Delete customer\n\n## How the API search logic works?\n\
+    1. User submits a request to search customer profiles by name\n2. Request gets\
+    \ received and customer data is searched in AWS CloudSearch \n3. The search result\
+    \ returned has a summary list of customers matching the search criteria\n\n`NOTE:\
+    \ the above search is meant to be used to support predictive search feature at\
+    \ the front-end app`\n\n## How the API search by Id logic works?\n1. User submits\
+    \ a request to search customer profiles by name\n2. Request gets received and\
+    \ customer data is searched in AWS DynamoDB \n3. The search result returned has\
+    \ the complete profile of the customer with all the attributes\n"
   version: "1.0.0"
-  title: "Customer Profile API"
+  title: "Customer Profile Management Microservice"
   contact:
+    name: "API Support"
+    url: "http://www.example.com/support"
     email: "info@earth2.com.au"
   license:
-    name: "MIT"
+    name: "MIT License"
     url: "https://opensource.org/licenses/MIT"
-host: "virtserver.swaggerhub.com"
-basePath: "/Earth2Software/customer-profile-api/1.0.0"
+host: "api-ecs-dev.myprototype.com.au"
 tags:
-- name: "admins"
-  description: "Secured Admin-only calls"
-- name: "developers"
-  description: "Operations available to regular developers"
+- name: "01 Profile Queries (Read)"
+  description: "Operations available to query customer profile"
 schemes:
 - "https"
 paths:
-  /customers:
+  /v1/customers:
     get:
       tags:
-      - "developers"
-      summary: "searches inventory"
+      - "01 Profile Queries (Read)"
+      summary: "searches customers and return a list"
       description: "This API returns a summary list of customers who matches the query\
-        \ parameters (name, dob, etc.) from dynamoDB\n"
+        \ parameters (name, dob, etc.) from CloudSearch\n"
       operationId: "searchCustomers"
       produces:
       - "application/json"
       parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Authorization Header"
+        required: true
+        type: "string"
+        default: "Basic QUtJQUo1WloyNldXR1hWVjNPT0E6Y0FZTXV3T0YrK3NYTDdrc20vTG5YYUNFU1dJVGE4TXpBQXpiaEdiOQ=="
       - name: "name"
         in: "query"
         description: "pass an optional search string for looking up inventory"
-        required: false
+        required: true
         type: "string"
+        default: "jack"
       responses:
         200:
           description: "search results matching criteria"
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/InventoryItem"
-        400:
-          description: "bad input parameter"
-  /customers/{customerId}:
+              $ref: "#/definitions/customerList"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "NotFound"
+          schema:
+            $ref: "#/definitions/Error"
+        501:
+          description: "Not Implemented"
+          schema:
+            $ref: "#/definitions/Error"
+        502:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/Error"
+        504:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        505:
+          description: "HTTP Version Not Supported"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
+  /v1/customers/{customerId}:
     get:
       tags:
-      - "developers"
-      summary: "searches inventory"
+      - "01 Profile Queries (Read)"
+      summary: "Get customer profile by id"
       description: "This API returns the API Profile for the customer with the customer\
         \ Id specified by customerId from DynamoDB\n"
       operationId: "getCustomerProfile"
       produces:
       - "application/json"
       parameters:
+      - name: "Authorization"
+        in: "header"
+        description: "Authorization Header"
+        required: true
+        type: "string"
+        default: "Basic QUtJQUo1WloyNldXR1hWVjNPT0E6Y0FZTXV3T0YrK3NYTDdrc20vTG5YYUNFU1dJVGE4TXpBQXpiaEdiOQ=="
       - name: "customerId"
         in: "path"
-        description: "Numeric ID of the user to get."
+        description: "Numeric ID of the customer to get."
         required: true
         type: "integer"
+        default: 120000040
       responses:
         200:
           description: "search results matching criteria"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/InventoryItem"
-        400:
-          description: "bad input parameter"
+            $ref: "#/definitions/customerProfile"
+        401:
+          description: "Unauthorized"
+          schema:
+            $ref: "#/definitions/Error"
+        403:
+          description: "Forbidden"
+          schema:
+            $ref: "#/definitions/Error"
+        404:
+          description: "NotFound"
+          schema:
+            $ref: "#/definitions/Error"
+        501:
+          description: "Not Implemented"
+          schema:
+            $ref: "#/definitions/Error"
+        502:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/Error"
+        504:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        505:
+          description: "HTTP Version Not Supported"
+          schema:
+            $ref: "#/definitions/Error"
+        default:
+          description: "Internal Server Error"
+          schema:
+            $ref: "#/definitions/Error"
 definitions:
-  InventoryItem:
+  Error:
+    type: "object"
+    required:
+    - "code"
+    - "message"
+    - "status"
+    properties:
+      status:
+        type: "string"
+        example: "OK"
+        description: "application-specific error code"
+      code:
+        type: "string"
+        example: "1010"
+        description: "application-specific error code"
+      message:
+        type: "string"
+        example: "human-readable summary of the problem"
+        description: "human-readable summary of the problem"
+  customerProfile:
     type: "object"
     required:
     - "id"
-    - "manufacturer"
-    - "name"
-    - "releaseDate"
     properties:
       id:
         type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        example: "120001415"
       name:
         type: "string"
-        example: "Widget Adapter"
-      releaseDate:
+        example: "harold jack"
+      firstname:
         type: "string"
-        format: "int32"
-        example: "2016-08-29T09:12:33.001Z"
-      manufacturer:
-        $ref: "#/definitions/Manufacturer"
+        example: "jack"
+      lastname:
+        type: "string"
+        example: "jack"
+      dateofbirth:
+        type: "string"
+        example: "1981-11-29"
+      singlelineaddress:
+        type: "string"
+        example: "201 40 46 Shoreline Drive"
     example:
-      releaseDate: "2016-08-29T09:12:33.001Z"
-      name: "Widget Adapter"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      manufacturer:
-        phone: "408-867-5309"
-        name: "ACME Corporation"
-        homePage: "https://www.acme-corp.com"
-  Manufacturer:
+      dateofbirth: "1981-11-29"
+      firstname: "jack"
+      name: "harold jack"
+      id: "120001415"
+      singlelineaddress: "201 40 46 Shoreline Drive"
+      lastname: "jack"
+  customerList:
     required:
+    - "firstname"
+    - "id"
+    - "lastname"
     - "name"
     properties:
+      id:
+        type: "string"
+        example: "120001415"
       name:
         type: "string"
-        example: "ACME Corporation"
-      homePage:
+        example: "harold jack"
+      firstname:
         type: "string"
-        format: "url"
-        example: "https://www.acme-corp.com"
-      phone:
+        example: "jack"
+      lastname:
         type: "string"
-        example: "408-867-5309"
+        example: "jack"
+      dateofbirth:
+        type: "string"
+        example: "1981-11-29"
+      singlelineaddress:
+        type: "string"
+        example: "201 40 46 Shoreline Drive"
     example:
-      phone: "408-867-5309"
-      name: "ACME Corporation"
-      homePage: "https://www.acme-corp.com"
+      dateofbirth: "1981-11-29"
+      firstname: "jack"
+      name: "harold jack"
+      id: "120001415"
+      singlelineaddress: "201 40 46 Shoreline Drive"
+      lastname: "jack"
+responses:
+  400:
+    description: "Bad Request"
+    schema:
+      $ref: "#/definitions/Error"
+  401:
+    description: "Unauthorized"
+    schema:
+      $ref: "#/definitions/Error"
+  403:
+    description: "Forbidden"
+    schema:
+      $ref: "#/definitions/Error"
+  404:
+    description: "NotFound"
+    schema:
+      $ref: "#/definitions/Error"
+  501:
+    description: "Not Implemented"
+    schema:
+      $ref: "#/definitions/Error"
+  502:
+    description: "Bad Gateway"
+    schema:
+      $ref: "#/definitions/Error"
+  503:
+    description: "Service Unavailable"
+    schema:
+      $ref: "#/definitions/Error"
+  504:
+    description: "Gateway Timeout"
+    schema:
+      $ref: "#/definitions/Error"
+  505:
+    description: "HTTP Version Not Supported"
+    schema:
+      $ref: "#/definitions/Error"
+  default:
+    description: "Internal Server Error"
+    schema:
+      $ref: "#/definitions/Error"
