@@ -1,8 +1,8 @@
-[![E2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/aws-codebuild.svg)](https://support.smartbear.com/readyapi/docs/index.html) | [![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/readyAPI-E2EQA.svg?sanitize=1)](https://support.smartbear.com/readyapi/docs/index.html)
+[![E2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/aws-codebuild.svg)](https://support.smartbear.com/readyapi/docs/index.html) | [![2E Quality Assurance Test](https://media-assets.myprototype.com.au/github/badges/readyAPI-E2EQA.svg?sanitize=1&service=github)](https://support.smartbear.com/readyapi/docs/index.html)
 --|--
-&nbsp;&nbsp;![Build Status](https://codebuild.ap-southeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRC9IUEZKa2p1UDNWd29vb0dVZ1BwdzNTeldCNUJkd0Q0NDdlZGJlQjRzbDZRWTh1akN6SEtqU1hUQ2JoY25sR09mbUU5NnorcHl4WFN4blR4MUpSSXJZPSIsIml2UGFyYW1ldGVyU3BlYyI6IlNmcG8wQWtESWY4YVlQUG8iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)|&nbsp;&nbsp;![Functional Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Functional-status.svg?sanitize=1)
-&nbsp;&nbsp;![Unit Test StatusE](https://media-assets.myprototype.com.au/github/badges/JEST-UT-status.svg?sanitize=1&service=github)|&nbsp;&nbsp;![Security Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Security-status.svg?sanitize=1)
-&nbsp;&nbsp;|&nbsp;&nbsp;![Performance Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Performance-status.svg?sanitize=1)
+&nbsp;&nbsp;![Build Status](https://codebuild.ap-southeast-2.amazonaws.com/badges?uuid=eyJlbmNyeXB0ZWREYXRhIjoiRC9IUEZKa2p1UDNWd29vb0dVZ1BwdzNTeldCNUJkd0Q0NDdlZGJlQjRzbDZRWTh1akN6SEtqU1hUQ2JoY25sR09mbUU5NnorcHl4WFN4blR4MUpSSXJZPSIsIml2UGFyYW1ldGVyU3BlYyI6IlNmcG8wQWtESWY4YVlQUG8iLCJtYXRlcmlhbFNldFNlcmlhbCI6MX0%3D&branch=master)|&nbsp;&nbsp;![Functional Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Functional-status.svg?sanitize=1&service=github)
+&nbsp;&nbsp;![Unit Test StatusE](https://media-assets.myprototype.com.au/github/badges/JEST-UT-status.svg?sanitize=1&service=github)|&nbsp;&nbsp;![Security Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Security-status.svg?sanitize=1&service=github)
+&nbsp;&nbsp;|&nbsp;&nbsp;![Performance Test Status](https://media-assets.myprototype.com.au/github/badges/readyAPI-Performance-status.svg?sanitize=1&service=github)
  
 ---
 ## Overview
