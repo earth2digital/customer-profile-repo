@@ -23,7 +23,7 @@ paths:
     get:
       tags:
       - "01 Profile Queries"
-      summary: "searches customers"
+      summary: "searches customers and return a list"
       description: "This API returns a summary list of customers who matches the query\
         \ parameters (name, dob, etc.) from dynamoDB\n"
       operationId: "searchCustomers"
@@ -41,7 +41,7 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/InventoryItem"
+              $ref: "#/definitions/customerList"
         400:
           description: "bad input parameter"
   /customers/{customerId}:
@@ -57,7 +57,7 @@ paths:
       parameters:
       - name: "customerId"
         in: "path"
-        description: "Numeric ID of the user to get."
+        description: "Numeric ID of the customer to get."
         required: true
         type: "integer"
       responses:
@@ -66,15 +66,14 @@ paths:
           schema:
             type: "array"
             items:
-              $ref: "#/definitions/InventoryItem"
+              $ref: "#/definitions/customerProfile"
         400:
           description: "bad input parameter"
 definitions:
-  InventoryItem:
+  customerProfile:
     type: "object"
     required:
     - "id"
-    - "manufacturer"
     - "name"
     - "releaseDate"
     properties:
@@ -89,17 +88,11 @@ definitions:
         type: "string"
         format: "int32"
         example: "2016-08-29T09:12:33.001Z"
-      manufacturer:
-        $ref: "#/definitions/Manufacturer"
     example:
       releaseDate: "2016-08-29T09:12:33.001Z"
       name: "Widget Adapter"
       id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
-      manufacturer:
-        phone: "408-867-5309"
-        name: "ACME Corporation"
-        homePage: "https://www.acme-corp.com"
-  Manufacturer:
+  customerList:
     required:
     - "name"
     properties:
