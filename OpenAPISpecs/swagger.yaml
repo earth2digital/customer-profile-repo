@@ -73,8 +73,24 @@ paths:
           description: "NotFound"
           schema:
             $ref: "#/definitions/Error"
+        501:
+          description: "Not Implemented"
+          schema:
+            $ref: "#/definitions/Error"
+        502:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/Error"
         504:
           description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        505:
+          description: "HTTP Version Not Supported"
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -123,8 +139,24 @@ paths:
           description: "NotFound"
           schema:
             $ref: "#/definitions/Error"
+        501:
+          description: "Not Implemented"
+          schema:
+            $ref: "#/definitions/Error"
+        502:
+          description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        503:
+          description: "Service Unavailable"
+          schema:
+            $ref: "#/definitions/Error"
         504:
           description: "Gateway Timeout"
+          schema:
+            $ref: "#/definitions/Error"
+        505:
+          description: "HTTP Version Not Supported"
           schema:
             $ref: "#/definitions/Error"
         default:
@@ -229,8 +261,24 @@ responses:
     description: "NotFound"
     schema:
       $ref: "#/definitions/Error"
+  501:
+    description: "Not Implemented"
+    schema:
+      $ref: "#/definitions/Error"
+  502:
+    description: "Bad Gateway"
+    schema:
+      $ref: "#/definitions/Error"
+  503:
+    description: "Service Unavailable"
+    schema:
+      $ref: "#/definitions/Error"
   504:
     description: "Gateway Timeout"
+    schema:
+      $ref: "#/definitions/Error"
+  505:
+    description: "HTTP Version Not Supported"
     schema:
       $ref: "#/definitions/Error"
   default:
