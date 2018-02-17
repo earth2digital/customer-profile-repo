@@ -45,8 +45,9 @@ paths:
       - name: "name"
         in: "query"
         description: "pass an optional search string for looking up inventory"
-        required: false
+        required: true
         type: "string"
+        default: "adam"
       responses:
         200:
           description: "search results matching criteria"
