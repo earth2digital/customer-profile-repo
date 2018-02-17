@@ -30,6 +30,8 @@ tags:
   description: "Operations available to query customer profile"
 schemes:
 - "https"
+security:
+- basicAuth: []
 paths:
   /v1/customers:
     get:
@@ -83,6 +85,9 @@ paths:
               $ref: "#/definitions/customerProfile"
         400:
           description: "bad input parameter"
+securityDefinitions:
+  basicAuth:
+    type: "basic"
 definitions:
   customerProfile:
     type: "object"
