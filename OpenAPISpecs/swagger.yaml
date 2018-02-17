@@ -99,25 +99,38 @@ definitions:
   customerProfile:
     type: "object"
     required:
+    - "dateofbirth"
+    - "firstname"
     - "id"
+    - "lastname"
     - "name"
-    - "releaseDate"
+    - "singlelineaddress"
     properties:
       id:
         type: "string"
-        format: "uuid"
-        example: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+        example: "120001415"
       name:
         type: "string"
-        example: "Widget Adapter"
-      releaseDate:
+        example: "harold jack"
+      firstname:
         type: "string"
-        format: "int32"
-        example: "2016-08-29T09:12:33.001Z"
+        example: "jack"
+      lastname:
+        type: "string"
+        example: "jack"
+      dateofbirth:
+        type: "string"
+        example: "1981-11-29"
+      singlelineaddress:
+        type: "string"
+        example: "201 40 46 Shoreline Drive"
     example:
-      releaseDate: "2016-08-29T09:12:33.001Z"
-      name: "Widget Adapter"
-      id: "d290f1ee-6c54-4b01-90e6-d701748f0851"
+      dateofbirth: "1981-11-29"
+      firstname: "jack"
+      name: "harold jack"
+      id: "120001415"
+      singlelineaddress: "201 40 46 Shoreline Drive"
+      lastname: "jack"
   customerList:
     required:
     - "name"
