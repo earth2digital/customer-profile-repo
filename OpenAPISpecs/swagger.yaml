@@ -99,12 +99,7 @@ definitions:
   customerProfile:
     type: "object"
     required:
-    - "dateofbirth"
-    - "firstname"
     - "id"
-    - "lastname"
-    - "name"
-    - "singlelineaddress"
     properties:
       id:
         type: "string"
@@ -133,12 +128,10 @@ definitions:
       lastname: "jack"
   customerList:
     required:
-    - "dateofbirth"
     - "firstname"
     - "id"
     - "lastname"
     - "name"
-    - "singlelineaddress"
     properties:
       id:
         type: "string"
