@@ -33,7 +33,7 @@ info:
 host: "virtserver.swaggerhub.com"
 basePath: "/Earth2Software/customer-profile-api/1.0.0"
 tags:
-- name: "01 Profile Queries"
+- name: "01 Profile Queries (Read)"
   description: "Operations available to query customer profile"
 schemes:
 - "https"
@@ -41,7 +41,7 @@ paths:
   /customers:
     get:
       tags:
-      - "01 Profile Queries"
+      - "01 Profile Queries (Read)"
       summary: "searches customers and return a list"
       description: "This API returns a summary list of customers who matches the query\
         \ parameters (name, dob, etc.) from dynamoDB\n"
@@ -66,7 +66,7 @@ paths:
   /customers/{customerId}:
     get:
       tags:
-      - "01 Profile Queries"
+      - "01 Profile Queries (Read)"
       summary: "Get customer profile by id"
       description: "This API returns the API Profile for the customer with the customer\
         \ Id specified by customerId from DynamoDB\n"
