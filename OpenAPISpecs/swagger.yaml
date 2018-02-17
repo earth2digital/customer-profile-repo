@@ -124,9 +124,7 @@ paths:
         200:
           description: "search results matching criteria"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/customerProfile"
+            $ref: "#/definitions/customerProfile"
         401:
           description: "Unauthorized"
           schema:
