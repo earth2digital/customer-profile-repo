@@ -16,7 +16,7 @@ info:
     \ customer data is searched in AWS DynamoDB \n3. The search result returned has\
     \ the complete profile of the customer with all the attributes\n"
   version: "1.0.0"
-  title: "Customer Profile Management API"
+  title: "Customer Profile Management Microservice"
   contact:
     name: "API Support"
     url: "http://www.example.com/support"
