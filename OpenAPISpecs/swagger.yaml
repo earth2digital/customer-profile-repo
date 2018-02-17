@@ -166,11 +166,20 @@ paths:
 definitions:
   Error:
     type: "object"
+    required:
+    - "code"
+    - "message"
+    - "status"
     properties:
-      errors:
-        type: "array"
-        items:
-          $ref: "#/definitions/Error_errors"
+      status:
+        type: "integer"
+        description: "application-specific error code"
+      code:
+        type: "string"
+        description: "application-specific error code"
+      message:
+        type: "string"
+        description: "human-readable summary of the problem"
   customerProfile:
     type: "object"
     required:
@@ -233,17 +242,6 @@ definitions:
       id: "120001415"
       singlelineaddress: "201 40 46 Shoreline Drive"
       lastname: "jack"
-  Error_errors:
-    properties:
-      status:
-        type: "integer"
-        description: "application-specific error code"
-      code:
-        type: "string"
-        description: "application-specific error code"
-      message:
-        type: "string"
-        description: "human-readable summary of the problem"
 responses:
   400:
     description: "Bad Request"
