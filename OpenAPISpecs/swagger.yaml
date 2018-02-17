@@ -1,7 +1,26 @@
 ---
 swagger: "2.0"
 info:
-  description: "This isa demo API for customer profile"
+  description: "\nThe profile management microservice enables access to customer data\
+    \ to add, update, retrieve or remove customer profiles. \n\nDesign Reference -\
+    \ [Customer Profile Management Microservice](https://drive.google.com/file/d/sampleurl/view?usp=sharing)\n\
+    \n## Profile management microservice has the following functions:\n- Register\
+    \ a new customer\n- Search customers by name\n- Get customer profile by Id\n-\
+    \ Update customer profile\n- Delete customer\n\n## Business use case \nCustomer\
+    \ receives email for a particular campaign. A URL/web link would be included for\
+    \ the customer to click on to take further actions. When the customer clicks on\
+    \ the link included in the email, the customer would be redirected to a web page\
+    \ where the relevant data (e.g. customer offers) would be displayed.\n\nThe URL\
+    \ included in the email would contain  encrypted version of the customer's CRN.\n\
+    \n## How the API search logic works?\n1. User submits a request to search customer\
+    \ profiles by name\n2. Request gets received and customer data is searched in\
+    \ AWS CloudSearch \n3. The search result returned has a summary list of customers\
+    \ matching the search criteria\n\n`NOTE: the above search is meant to be used\
+    \ to support predictive search feature at the front-end app`\n\n How the API search\
+    \ by Id logic works?\n1. User submits a request to search customer profiles by\
+    \ name\n2. Request gets received and customer data is searched in AWS DynamoDB\
+    \ \n3. The search result returned has the complete profile of the customer with\
+    \ all the attributes\n"
   version: "1.0.0"
   title: "Customer Profile Management API"
   contact:
