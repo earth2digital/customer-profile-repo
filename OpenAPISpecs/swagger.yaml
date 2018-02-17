@@ -32,7 +32,7 @@ tags:
 schemes:
 - "https"
 paths:
-  /customers:
+  /:
     get:
       tags:
       - "01 Profile Queries (Read)"
@@ -57,7 +57,7 @@ paths:
               $ref: "#/definitions/customerList"
         400:
           description: "bad input parameter"
-  /customers/{customerId}:
+  /{customerId}:
     get:
       tags:
       - "01 Profile Queries (Read)"
