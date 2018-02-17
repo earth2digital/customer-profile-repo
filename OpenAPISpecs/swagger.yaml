@@ -37,7 +37,7 @@ paths:
       - "01 Profile Queries (Read)"
       summary: "searches customers and return a list"
       description: "This API returns a summary list of customers who matches the query\
-        \ parameters (name, dob, etc.) from dynamoDB\n"
+        \ parameters (name, dob, etc.) from CloudSearch\n"
       operationId: "searchCustomers"
       produces:
       - "application/json"
