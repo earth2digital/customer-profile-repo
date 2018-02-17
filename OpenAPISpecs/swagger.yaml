@@ -25,14 +25,13 @@ info:
     name: "MIT License"
     url: "https://opensource.org/licenses/MIT"
 host: "api-ecs-dev.myprototype.com.au"
-basePath: "/v1/customers"
 tags:
 - name: "01 Profile Queries (Read)"
   description: "Operations available to query customer profile"
 schemes:
 - "https"
 paths:
-  /:
+  /v1/customers:
     get:
       tags:
       - "01 Profile Queries (Read)"
@@ -57,7 +56,7 @@ paths:
               $ref: "#/definitions/customerList"
         400:
           description: "bad input parameter"
-  /{customerId}:
+  /v1/customers/{customerId}:
     get:
       tags:
       - "01 Profile Queries (Read)"
