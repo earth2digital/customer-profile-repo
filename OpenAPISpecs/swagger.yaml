@@ -133,19 +133,35 @@ definitions:
       lastname: "jack"
   customerList:
     required:
+    - "dateofbirth"
+    - "firstname"
+    - "id"
+    - "lastname"
     - "name"
+    - "singlelineaddress"
     properties:
+      id:
+        type: "string"
+        example: "120001415"
       name:
         type: "string"
-        example: "ACME Corporation"
-      homePage:
+        example: "harold jack"
+      firstname:
         type: "string"
-        format: "url"
-        example: "https://www.acme-corp.com"
-      phone:
+        example: "jack"
+      lastname:
         type: "string"
-        example: "408-867-5309"
+        example: "jack"
+      dateofbirth:
+        type: "string"
+        example: "1981-11-29"
+      singlelineaddress:
+        type: "string"
+        example: "201 40 46 Shoreline Drive"
     example:
-      phone: "408-867-5309"
-      name: "ACME Corporation"
-      homePage: "https://www.acme-corp.com"
+      dateofbirth: "1981-11-29"
+      firstname: "jack"
+      name: "harold jack"
+      id: "120001415"
+      singlelineaddress: "201 40 46 Shoreline Drive"
+      lastname: "jack"
