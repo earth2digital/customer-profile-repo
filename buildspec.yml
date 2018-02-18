@@ -1,0 +1,98 @@
+####################################################################
+# Overview: this is the buildspec.yml YAML file used
+#           by AWS CodeBuild to build the docker image
+#           for the Customer Profile API App
+#           after the image is built, it is pushed to AWS ECR Repo
+# license:
+#    name: MIT
+#    url: https://opensource.org/licenses/MIT
+###################################################################
+
+version: 0.2
+
+env:
+  variables:
+    E2_REPO_NAME: "customer-profile-repo"
+    E2_ECS_CLUSTER_NAME: "ecs-dev-cluster"
+    E2_UNIT_TEST_BANNER_BEGIN: "---------------------------- Unit Test Cases ---------------------------"
+    E2_UNIT_TEST_BANNER_END  : "---------------------------- End of Unit Test Cases --------------------"
+  parameter-store:
+    E2_IMAGE_REPO_NAME: "/CodeBuild/EARTH2_IMAGE_REPO_NAME"
+    E2_IMAGE_TAG: "/CodeBuild/EARTH2_IMAGE_TAG"
+    E2_ECS_SERVICE_CONTAINER_NAME: "/CodeBuild/EARTH2_ECS_SERVICE_CONTAINER_NAME"
+    E2_AWS_ACCOUNT_ID: "/CodeBuild/EARTH2_AWS_ACCOUNT_ID"
+    E2_AWS_ECR_REGION: "/CodeBuild/EARTH2_AWS_ECR_REGION"
+phases:
+  install:
+    commands:
+      - echo linux version ...
+      - lsb_release -a
+      - echo change directory to app ...
+      - echo Installing npm
+      - curl -sL https://deb.nodesource.com/setup_8.x | bash -
+      - apt-get install nodejs
+      - node -v
+      - npm -v
+      - printenv
+      - apt-get -y install nfs-common
+  pre_build:
+    commands:
+      - echo install dependencies and running unit test cases
+      - pwd && cd app && npm install
+      - echo $E2_UNIT_TEST_BANNER_BEGIN
+      - npm test
+      - echo $E2_UNIT_TEST_BANNER_END
+      - echo "remove node_modules to remove JEST dependencies"
+      - rm -rf node_modules
+      - echo "install all dependencies except devDependencies"
+      - npm install --only=production && cd ..
+      - echo Logging in to Amazon ECR...
+      - echo $E2_AWS_ECR_REGION
+      - $(aws ecr get-login --no-include-email --region $E2_AWS_ECR_REGION)
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Docker image $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG ...          
+      - docker build -t $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG .
+      - docker tag $E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG   
+      - echo Define a task for the app in ECS
+      - cat /codebuild/output/tmp/env.sh
+      - E2_TASK_CHECK_RESULT=$(aws ecs list-task-definitions  --region $E2_AWS_ECR_REGION --family-prefix ${E2_REPO_NAME}-task|grep ${E2_REPO_NAME}-task|wc -l)
+      - echo $E2_TASK_CHECK_RESULT
+      - |
+          if [ "$E2_TASK_CHECK_RESULT" -eq 0 ]; then
+            echo "We need to create task ${E2_REPO_NAME}-task here"
+          else
+            echo "We don't need to create task ${E2_REPO_NAME}-task, as task already exist"
+          fi
+      - E2_SERVICE_CHECK_RESULT=$(aws ecs list-services --region $E2_AWS_ECR_REGION --cluster $E2_ECS_CLUSTER_NAME|egrep "${E2_REPO_NAME}-service\""|wc -l)
+      - echo $E2_SERVICE_CHECK_RESULT
+      - |
+          if [ "$E2_SERVICE_CHECK_RESULT" -eq 0 ]; then
+            echo "We need to create service ${E2_REPO_NAME}-service here"
+          else
+            echo "We don't need to create service ${E2_REPO_NAME}-service, as task already exist"
+          fi
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image to $E2_AWS_ACCOUNT_ID $E2_AWS_ECR_REGION ...
+      - docker push $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG
+      - echo Writing image definitions file...
+      - printf '[{"name":"%s","imageUri":"%s"}]' $E2_ECS_SERVICE_CONTAINER_NAME $E2_AWS_ACCOUNT_ID.dkr.ecr.$E2_AWS_ECR_REGION.amazonaws.com/$E2_IMAGE_REPO_NAME:$E2_IMAGE_TAG > imagedefinitions.json
+      - cat imagedefinitions.json
+      - ls -ltr $CODEBUILD_SRC_DIR/
+      - chmod +x $CODEBUILD_SRC_DIR/mountefs.sh
+      - $CODEBUILD_SRC_DIR/mountefs.sh
+      - echo "create app directory under efs"
+      - mkdir -p /efs/$E2_REPO_NAME
+      - echo $E2_AWS_ACCOUNT_ID >> /efs/$E2_REPO_NAME/.env
+      - cat /efs/$E2_REPO_NAME/.env
+      - ls -ltr /efs/*
+artifacts:
+  files:
+    - imagedefinitions.json
+# cache node_modules on S3 to speedup the build process
+cache:
+  paths:
+#    - 'app/node_modules/**/*'
