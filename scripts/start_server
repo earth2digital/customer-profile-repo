@@ -1,4 +1,0 @@
-#!/bin/bash
-cd /home/ec2-user/express-service
-export PORT=80
-forever start -o /home/ec2-user/express-service/logs/out.log -e /home/ec2-user/express-service/logs/err.log server.js

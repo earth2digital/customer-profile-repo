@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="/v1/customers" path="/v1/customers" id="8320cf67-c988-40bb-8f6c-0a0a57fdae21" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="8320cf67-c988-40bb-8f6c-0a0a57fdae21fileName">%2Fv1%2Fcustomers</con:setting></con:settings><con:parameters/><con:method name="searchCustomers" id="218167c8-67da-4256-bb06-1988fe754c48" method="GET"><con:description>This API returns a summary list of customers who matches the query parameters (name, dob, etc.) from CloudSearch
+
+searches customers and return a list</con:description><con:settings/><con:parameters><con:parameter required="true"><con:name>Authorization</con:name><con:style>HEADER</con:style><con:default>Basic QUtJQUo1WloyNldXR1hWVjNPT0E6Y0FZTXV3T0YrK3NYTDdrc20vTG5YYUNFU1dJVGE4TXpBQXpiaEdiOQ==</con:default><con:description>Authorization Header</con:description></con:parameter><con:parameter required="true"><con:name>name</con:name><con:style>QUERY</con:style><con:default>jack</con:default><con:description>pass an optional search string for looking up inventory</con:description></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:sampleContent>[ {
+  "dateofbirth" : "1981-11-29",
+  "firstname" : "jack",
+  "name" : "harold jack",
+  "id" : "120001415",
+  "singlelineaddress" : "201 40 46 Shoreline Drive",
+  "lastname" : "jack"
+} ]</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>401</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>403</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>501</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>502</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>503</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>504</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>505</con:status><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status/><con:params/><con:sampleContent>{
+  "status" : "OK",
+  "code" : "1010",
+  "message" : "human-readable summary of the problem"
+}</con:sampleContent></con:representation><con:request name="searchCustomersRequest" id="ecd91715-9e83-4d32-a95f-544c08eaebd6" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>https://api-ecs-dev.myprototype.com.au</con:endpoint><con:request/><con:credentials><con:selectedAuthProfile>No Authorization</con:selectedAuthProfile><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:parameters/></con:request></con:method></con:resource>
