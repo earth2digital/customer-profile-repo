@@ -5,7 +5,7 @@
   </con:settings>
   <con:vcsConfiguration>
     <con:vcsName>Git</con:vcsName>
-    <con:repositoryIdentifier>https://github.com/earth2software/customer-profile-repo.git#Test</con:repositoryIdentifier>
+    <con:repositoryIdentifier>https://github.com/earth2software/customer-profile-repo.git#\/Test</con:repositoryIdentifier>
   </con:vcsConfiguration>
   <con:savedRecentRuns>1</con:savedRecentRuns>
   <con:properties/>
