@@ -103,7 +103,7 @@ function search_attr(req, res, next){
   let params = {
     query: `(and ${attr}:'${value}')`, /* required */
     queryParser: 'structured',
-    size: 10
+    size: 10 
   };
   //console.log('params', params);
   let p = cloudsearchdomain.search(params).promise();
