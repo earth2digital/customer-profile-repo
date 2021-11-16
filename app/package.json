@@ -7,7 +7,7 @@
         "test": "jest --forceExit --json --outputFile=customer-profile-api-app-utest-results.json"
     },
     "dependencies": {
-        "aws-sdk": "^2.176.0",
+        "aws-sdk": "^2.814.0",
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
         "express-basic-auth": "^1.1.3",
