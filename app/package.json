@@ -16,7 +16,7 @@
         "request": "^2.83.0"
     },
     "devDependencies": {
-        "jest": "^22.1.4",
-        "jest-cli": "^22.1.4"
+        "jest": "^29.3.1",
+        "jest-cli": "^29.3.1"
     }
 }
